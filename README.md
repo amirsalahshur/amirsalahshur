@@ -71,17 +71,6 @@
 
 ---
 
-## 🎯 Featured Projects
-
-<div align="center">
-
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=amirsalahshur&repo=awesome-project&theme=radical)](https://github.com/amirsalahshur/awesome-project)
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=amirsalahshur&repo=another-project&theme=radical)](https://github.com/amirsalahshur/another-project)
-
-</div>
-
----
-
 ## 💭 Random Dev Quote
 
 <div align="center">
