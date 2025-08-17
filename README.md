@@ -71,46 +71,12 @@
 
 ---
 
-## 📊 GitHub Stats
-
-<div align="center">
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=amirsalahshur&theme=radical&hide_border=false&include_all_commits=true&count_private=true)
-
-![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=amirsalahshur&theme=radical&hide_border=false)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=amirsalahshur&theme=radical&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
-
-</div>
-
----
-
-## 🏆 GitHub Trophies
-
-<div align="center">
-
-![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=amirsalahshur&theme=radical&no-frame=false&no-bg=false&margin-w=4)
-
-</div>
-
----
-
 ## 🎯 Featured Projects
 
 <div align="center">
 
 [![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=amirsalahshur&repo=awesome-project&theme=radical)](https://github.com/amirsalahshur/awesome-project)
 [![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=amirsalahshur&repo=another-project&theme=radical)](https://github.com/amirsalahshur/another-project)
-
-</div>
-
----
-
-## 📈 Activity Graph
-
-<div align="center">
-
-![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=amirsalahshur&bg_color=0d1117&color=58a6ff&line=58a6ff&point=f0f6fc&area=true&hide_border=true)
 
 </div>
 
