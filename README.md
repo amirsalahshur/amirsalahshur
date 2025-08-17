@@ -72,7 +72,7 @@
 
 <div style="background: linear-gradient(135deg, #0d1117 0%, #161b22 100%); border: 2px solid #30363d; border-radius: 12px; padding: 25px; margin: 20px;">
 
-<h2 style="color: #58a6ff; font-family: 'Fira Code', monospace; text-align: center; text-shadow: 0 0 10px rgba(88, 166, 255, 0.3);">$ cat skills.json</h2>
+<h2 style="color: #58a6ff; font-family: 'Fira Code', monospace; text-align: center; text-shadow: 0 0 10px rgba(88, 166, 255, 0.3);">$ cat tech_stack.sh</h2>
 
 <div style="background: #0d1117; border: 1px solid #21262d; border-radius: 6px; padding: 20px; font-family: 'Fira Code', monospace; color: #c9d1d9;">
 
