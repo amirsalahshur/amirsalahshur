@@ -93,6 +93,6 @@
 
 <p><strong>Thank you for visiting my profile! Let's connect and build something amazing together! 🚀</strong></p>
 
-![Wave](https://raw.githubusercontent.com/mayhemantt/mayhemantt/Update/svg/Bottom.svg)
+![Wave](https://capsule-render.vercel.app/api?type=waving&color=58A6FF&height=120&section=footer)
 
 </div>
