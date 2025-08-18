@@ -169,18 +169,35 @@ class LanguageSelector {
     
     async selectLanguage(langCode) {
         if (window.i18n) {
-            await window.i18n.changeLanguage(langCode);
-            this.updateSelectorDisplay(langCode);
-            this.closeDropdown();
+            // Add loading state
+            document.body.classList.add('language-switching');
             
-            // Update selected option
-            const options = document.querySelectorAll('.language-option');
-            options.forEach(option => {
-                option.removeAttribute('data-selected');
-                if (option.getAttribute('data-lang') === langCode) {
-                    option.setAttribute('data-selected', 'true');
-                }
-            });
+            try {
+                await window.i18n.changeLanguage(langCode);
+                this.updateSelectorDisplay(langCode);
+                this.closeDropdown();
+                
+                // Update selected option
+                const options = document.querySelectorAll('.language-option');
+                options.forEach(option => {
+                    option.removeAttribute('data-selected');
+                    if (option.getAttribute('data-lang') === langCode) {
+                        option.setAttribute('data-selected', 'true');
+                    }
+                });
+                
+                // Smooth transition effect
+                setTimeout(() => {
+                    document.body.classList.remove('language-switching');
+                }, 200);
+                
+                // Show brief success feedback
+                this.showLanguageChangeConfirmation(langCode);
+                
+            } catch (error) {
+                console.error('Language change failed:', error);
+                document.body.classList.remove('language-switching');
+            }
         }
     }
     
@@ -202,6 +219,48 @@ class LanguageSelector {
             
             if (flagElement) flagElement.textContent = selectedLanguage.flag;
             if (nameElement) nameElement.textContent = selectedLanguage.name;
+        }
+    }
+    
+    showLanguageChangeConfirmation(langCode) {
+        const supportedLanguages = [
+            { code: 'en', name: 'English', flag: '🇺🇸' },
+            { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+            { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+            { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+            { code: 'fr', name: 'Français', flag: '🇫🇷' },
+            { code: 'zh', name: '中文', flag: '🇨🇳' },
+            { code: 'fa', name: 'فارسی', flag: '🇮🇷' }
+        ];
+        
+        const selectedLanguage = supportedLanguages.find(lang => lang.code === langCode);
+        if (selectedLanguage) {
+            // Create temporary confirmation tooltip
+            const confirmation = document.createElement('div');
+            confirmation.className = 'language-change-confirmation';
+            confirmation.innerHTML = `
+                <span class="confirmation-flag">${selectedLanguage.flag}</span>
+                <span class="confirmation-text">${selectedLanguage.name}</span>
+            `;
+            
+            const selector = document.querySelector('.language-selector');
+            if (selector) {
+                selector.appendChild(confirmation);
+                
+                // Show and hide with animation
+                requestAnimationFrame(() => {
+                    confirmation.classList.add('show');
+                    
+                    setTimeout(() => {
+                        confirmation.classList.remove('show');
+                        setTimeout(() => {
+                            if (confirmation.parentNode) {
+                                confirmation.parentNode.removeChild(confirmation);
+                            }
+                        }, 300);
+                    }, 1500);
+                });
+            }
         }
     }
 }

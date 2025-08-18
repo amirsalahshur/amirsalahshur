@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Test - Amir Salahshur Portfolio</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/i18n.js" defer></script>
+    <script src="js/language-selector.js" defer></script>
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 120px auto 2rem;
+            padding: 2rem;
+        }
+        .test-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            background: var(--bg-primary);
+        }
+        .test-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .language-test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .lang-sample {
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+        .lang-code {
+            font-family: monospace;
+            color: var(--primary-color);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Language Test</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="work.html" class="nav-link" data-i18n="nav.work">Work</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger" data-i18n-aria-label="menu_toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="test-container">
+        <div class="test-section">
+            <h2 class="test-title">Language Selector Test</h2>
+            <p>Switch between languages using the selector in the top-right corner. Observe:</p>
+            <ul>
+                <li>Smooth language switching animation</li>
+                <li>Proper RTL support for Arabic and Persian</li>
+                <li>Font rendering for different scripts</li>
+                <li>Mobile responsiveness</li>
+                <li>Confirmation feedback</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2 class="test-title">Navigation Translation</h2>
+            <div class="language-test-grid">
+                <div class="lang-sample">
+                    <span class="lang-code">EN</span>
+                    <span data-i18n="nav.home">Home</span>
+                </div>
+                <div class="lang-sample">
+                    <span class="lang-code">RU</span>
+                    <span data-i18n="nav.work">Work</span>
+                </div>
+                <div class="lang-sample">
+                    <span class="lang-code">AR</span>
+                    <span data-i18n="nav.about">About</span>
+                </div>
+                <div class="lang-sample">
+                    <span class="lang-code">FA</span>
+                    <span data-i18n="nav.contact">Contact</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2 class="test-title">Hero Section Translation</h2>
+            <div style="text-align: center; padding: 2rem;">
+                <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">
+                    <span data-i18n="hero.greeting">Hi, I'm</span> <span class="highlight" data-i18n="hero.name">Amir Salahshur</span>
+                </h1>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;" data-i18n="hero.subtitle">
+                    Passionate software developer crafting innovative solutions with modern technologies.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-primary" data-i18n="hero.view_work">View My Work</button>
+                    <button class="btn btn-secondary" data-i18n="hero.get_in_touch">Get In Touch</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2 class="test-title">RTL Layout Test</h2>
+            <p>Switch to Arabic (العربية) or Persian (فارسی) to test right-to-left layout:</p>
+            <div class="highlight-item" style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem;">
+                <div class="highlight-icon">🌐</div>
+                <div>
+                    <h4>RTL Support</h4>
+                    <p>Text flows from right to left, layouts reverse, and typography optimizes for Arabic/Persian scripts.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2 class="test-title">Typography Test</h2>
+            <div class="language-test-grid">
+                <div class="lang-sample">
+                    <span class="lang-code">🇺🇸 EN</span>
+                    <div style="margin-top: 0.5rem;">Typography Test</div>
+                </div>
+                <div class="lang-sample">
+                    <span class="lang-code">🇷🇺 RU</span>
+                    <div style="margin-top: 0.5rem;">Тест Типографики</div>
+                </div>
+                <div class="lang-sample">
+                    <span class="lang-code">🇸🇦 AR</span>
+                    <div style="margin-top: 0.5rem;">اختبار الطباعة</div>
+                </div>
+                <div class="lang-sample">
+                    <span class="lang-code">🇮🇷 FA</span>
+                    <div style="margin-top: 0.5rem;">تست تایپوگرافی</div>
+                </div>
+                <div class="lang-sample">
+                    <span class="lang-code">🇨🇳 ZH</span>
+                    <div style="margin-top: 0.5rem;">排版测试</div>
+                </div>
+                <div class="lang-sample">
+                    <span class="lang-code">🇩🇪 DE</span>
+                    <div style="margin-top: 0.5rem;">Typografie Test</div>
+                </div>
+                <div class="lang-sample">
+                    <span class="lang-code">🇫🇷 FR</span>
+                    <div style="margin-top: 0.5rem;">Test de Typographie</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p data-i18n="footer.copyright">&copy; 2025 Amir Salahshur. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
