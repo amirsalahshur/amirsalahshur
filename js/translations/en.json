@@ -1,0 +1,74 @@
+{
+  "page_title_home": "Amir Salahshur - Portfolio",
+  "page_title_work": "Amir Salahshur - Work",
+  "page_title_about": "Amir Salahshur - About",
+  "page_title_contact": "Amir Salahshur - Contact",
+  "meta_description": "Amir Salahshur - Software Developer, Problem Solver, Tech Enthusiast",
+  
+  "nav": {
+    "home": "Home",
+    "work": "Work",
+    "about": "About", 
+    "contact": "Contact"
+  },
+  
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Amir Salahshur",
+    "subtitle": "Passionate software developer crafting innovative solutions with modern technologies. Active in both IT field and crypto space.",
+    "view_work": "View My Work",
+    "get_in_touch": "Get In Touch"
+  },
+  
+  "work": {
+    "title": "My Work",
+    "subtitle": "Showcasing my latest projects and achievements",
+    "view_project": "View Project",
+    "live_demo": "Live Demo",
+    "source_code": "Source Code"
+  },
+  
+  "about": {
+    "title": "About Me",
+    "subtitle": "Learn more about my background and expertise",
+    "description": "I am a passionate software developer with expertise in modern web technologies. I love solving complex problems and creating innovative solutions.",
+    "skills": "Skills",
+    "experience": "Experience",
+    "education": "Education"
+  },
+  
+  "contact": {
+    "title": "Let's Work Together",
+    "subtitle": "I'm always interested in new opportunities and exciting projects. Let's connect and build something amazing together!",
+    "name": "Name",
+    "name_placeholder": "Your full name",
+    "email": "Email",
+    "email_placeholder": "your.email@example.com",
+    "subject": "Subject",
+    "subject_placeholder": "Project discussion",
+    "message": "Message",
+    "message_placeholder": "Tell me about your project...",
+    "project_type": "Project Type",
+    "project_type_placeholder": "Select project type",
+    "send_message": "Send Message",
+    "project_types": {
+      "web": "Web Development",
+      "mobile": "Mobile App",
+      "consulting": "Consulting",
+      "other": "Other"
+    }
+  },
+  
+  "footer": {
+    "copyright": "© 2025 Amir Salahshur. All rights reserved.",
+    "quote": "\"Code is poetry written in logic\""
+  },
+  
+  "language_selector": {
+    "label": "Language",
+    "select_language": "Select Language"
+  },
+  
+  "loading": "Loading...",
+  "menu_toggle": "Toggle menu"
+}

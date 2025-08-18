@@ -49,6 +49,226 @@ html {
 *:focus-visible {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Language Selector Styles */
+.language-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+.language-selector-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    user-select: none;
+}
+
+.language-selector-button:hover,
+.language-selector-button.open {
+    background: var(--bg-secondary);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.current-language-flag {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.current-language-name {
+    font-weight: 500;
+    min-width: 60px;
+    text-align: left;
+}
+
+.language-arrow {
+    transition: var(--transition-smooth);
+    opacity: 0.7;
+}
+
+.language-selector-button.open .language-arrow {
+    transform: rotate(180deg);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition-smooth);
+    z-index: 1000;
+    min-width: 180px;
+}
+
+.language-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-dropdown-header {
+    padding: 0.75rem 1rem;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.language-options {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border: none;
+    background: none;
+    color: var(--text-primary);
+    position: relative;
+}
+
+.language-option:hover,
+.language-option:focus {
+    background: var(--bg-secondary);
+    outline: none;
+}
+
+.language-option[data-selected="true"] {
+    background: rgba(66, 133, 244, 0.1);
+    color: var(--primary-color);
+}
+
+.language-option[data-selected="true"]::after {
+    content: '✓';
+    position: absolute;
+    right: 1rem;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.language-flag {
+    font-size: 1.2rem;
+    line-height: 1;
+    width: 20px;
+    text-align: center;
+}
+
+.language-name {
+    font-weight: 500;
+    flex: 1;
+}
+
+/* RTL Support */
+[dir="rtl"] {
+    text-align: right;
+}
+
+[dir="rtl"] .language-selector {
+    margin-left: 1rem;
+    margin-right: auto;
+}
+
+[dir="rtl"] .language-dropdown {
+    right: auto;
+    left: 0;
+}
+
+[dir="rtl"] .current-language-name {
+    text-align: right;
+}
+
+[dir="rtl"] .language-option[data-selected="true"]::after {
+    right: auto;
+    left: 1rem;
+}
+
+/* RTL text direction for Arabic and Persian content */
+.rtl .hero-title,
+.rtl .hero-subtitle,
+.rtl .nav-link,
+.rtl p,
+.rtl h1, .rtl h2, .rtl h3, .rtl h4, .rtl h5, .rtl h6 {
+    text-align: right;
+}
+
+/* RTL navigation adjustments */
+[dir="rtl"] .nav-container {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .nav-menu {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .hero-container {
+    flex-direction: row-reverse;
+}
+
+/* Mobile responsiveness for language selector */
+@media (max-width: 768px) {
+    .language-selector {
+        margin-right: 0.5rem;
+        margin-left: 0;
+    }
+    
+    .language-selector-button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+        min-width: auto;
+    }
+    
+    .current-language-name {
+        display: none;
+    }
+    
+    .current-language-flag {
+        font-size: 1.3rem;
+    }
+    
+    .language-dropdown {
+        right: -0.5rem;
+        min-width: 160px;
+    }
+    
+    [dir="rtl"] .language-dropdown {
+        left: -0.5rem;
+        right: auto;
+    }
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
     border-radius: var(--border-radius);
 }
 

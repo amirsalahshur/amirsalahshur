@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/i18n.js" defer></script>
+    <script src="js/language-selector.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -18,19 +20,19 @@
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="work.html" class="nav-link active">Work</a>
+                    <a href="work.html" class="nav-link active" data-i18n="nav.work">Work</a>
                 </li>
                 <li class="nav-item">
-                    <a href="about.html" class="nav-link">About</a>
+                    <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
                 </li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" data-i18n-aria-label="menu_toggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -41,8 +43,8 @@
     <main>
         <section class="page-header">
             <div class="container">
-                <h1 class="page-title">My Work</h1>
-                <p class="page-subtitle">
+                <h1 class="page-title" data-i18n="work.title">My Work</h1>
+                <p class="page-subtitle" data-i18n="work.subtitle">
                     A collection of projects showcasing my skills in modern web development, 
                     problem-solving, and innovative solutions.
                 </p>
@@ -231,8 +233,8 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Amir Salahshur. All rights reserved.</p>
-            <p class="footer-quote">"Code is poetry written in logic"</p>
+            <p data-i18n="footer.copyright">&copy; 2025 Amir Salahshur. All rights reserved.</p>
+            <p class="footer-quote" data-i18n="footer.quote">"Code is poetry written in logic"</p>
         </div>
     </footer>
 

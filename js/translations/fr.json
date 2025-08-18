@@ -1,0 +1,74 @@
+{
+  "page_title_home": "Amir Salahshur - Portfolio",
+  "page_title_work": "Amir Salahshur - Travail",
+  "page_title_about": "Amir Salahshur - À propos",
+  "page_title_contact": "Amir Salahshur - Contact",
+  "meta_description": "Amir Salahshur - Développeur logiciel, résolveur de problèmes, passionné de technologie",
+  
+  "nav": {
+    "home": "Accueil",
+    "work": "Travail",
+    "about": "À propos", 
+    "contact": "Contact"
+  },
+  
+  "hero": {
+    "greeting": "Salut, je suis",
+    "name": "Amir Salahshur",
+    "subtitle": "Développeur logiciel passionné créant des solutions innovantes avec des technologies modernes. Actif dans le domaine informatique et l'espace crypto.",
+    "view_work": "Voir mon travail",
+    "get_in_touch": "Entrer en contact"
+  },
+  
+  "work": {
+    "title": "Mon travail",
+    "subtitle": "Présentation de mes derniers projets et réalisations",
+    "view_project": "Voir le projet",
+    "live_demo": "Démo en direct",
+    "source_code": "Code source"
+  },
+  
+  "about": {
+    "title": "À propos de moi",
+    "subtitle": "En savoir plus sur mon parcours et mon expertise",
+    "description": "Je suis un développeur logiciel passionné avec une expertise dans les technologies web modernes. J'aime résoudre des problèmes complexes et créer des solutions innovantes.",
+    "skills": "Compétences",
+    "experience": "Expérience",
+    "education": "Éducation"
+  },
+  
+  "contact": {
+    "title": "Entrer en contact",
+    "subtitle": "Discutons de votre prochain projet",
+    "name": "Nom",
+    "name_placeholder": "Votre nom complet",
+    "email": "E-mail",
+    "email_placeholder": "votre.email@exemple.com",
+    "subject": "Sujet",
+    "subject_placeholder": "Discussion de projet",
+    "message": "Message",
+    "message_placeholder": "Parlez-moi de votre projet...",
+    "project_type": "Type de projet",
+    "project_type_placeholder": "Sélectionner le type de projet",
+    "send_message": "Envoyer le message",
+    "project_types": {
+      "web": "Développement web",
+      "mobile": "Application mobile",
+      "consulting": "Conseil",
+      "other": "Autre"
+    }
+  },
+  
+  "footer": {
+    "copyright": "© 2025 Amir Salahshur. Tous droits réservés.",
+    "quote": "\"Le code est de la poésie écrite en logique\""
+  },
+  
+  "language_selector": {
+    "label": "Langue",
+    "select_language": "Sélectionner la langue"
+  },
+  
+  "loading": "Chargement...",
+  "menu_toggle": "Basculer le menu"
+}
