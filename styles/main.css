@@ -58,6 +58,86 @@ html {
     border-radius: 2px;
 }
 
+/* Touch device optimizations */
+@media (pointer: coarse) {
+    .btn,
+    .nav-link,
+    .language-option,
+    .language-selector-button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .work-item:hover {
+        transform: none;
+    }
+    
+    .work-item:active {
+        transform: scale(0.98);
+    }
+    
+    .social-card:hover,
+    .contact-method:hover {
+        transform: none;
+    }
+    
+    .social-card:active,
+    .contact-method:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Touch feedback styles */
+.touch-device .touch-active {
+    opacity: 0.7;
+    transform: scale(0.95);
+    transition: all 0.1s ease;
+}
+
+/* iOS specific optimizations */
+@supports (-webkit-touch-callout: none) {
+    .btn,
+    .nav-link,
+    .social-card {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    input,
+    textarea {
+        -webkit-appearance: none;
+        border-radius: var(--border-radius);
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #ffffff;
+        --text-secondary: #cccccc;
+        --text-muted: #999999;
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #2a2a2a;
+        --bg-tertiary: #1e1e1e;
+        --border-color: #444444;
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+    
+    .work-image {
+        background: linear-gradient(135deg, #333, #444);
+    }
+    
+    .skill {
+        background-color: #333;
+        border-color: #555;
+    }
+    
+    .skill:hover {
+        background-color: #555;
+    }
+}
+
 /* Language Selector Styles */
 .language-selector {
     position: relative;
@@ -1224,6 +1304,48 @@ body.menu-open {
     background: rgba(0, 0, 0, 0.5);
     z-index: -1;
     animation: fadeIn 0.3s ease;
+}
+
+/* Prevent scroll when mobile menu is open */
+body.nav-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+/* Better scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+    transition: var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* Safe area padding for notched devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .navbar {
+        padding-top: env(safe-area-inset-top);
+    }
+    
+    .hero {
+        padding-top: calc(80px + env(safe-area-inset-top));
+    }
+    
+    .page-header {
+        padding-top: calc(120px + env(safe-area-inset-top));
+    }
 }
 
 /* Typography and spacing optimizations */
@@ -2628,7 +2750,29 @@ a, button, input, textarea, select {
     transform: translateY(-2px);
 }
 
-/* Responsive Design */
+/* Enhanced Responsive Design */
+/* Large tablets and small desktops */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1000px;
+        padding: 0 2rem;
+    }
+    
+    .hero-container {
+        gap: 3rem;
+    }
+    
+    .work-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .about-content {
+        gap: 3rem;
+    }
+}
+
+/* Tablets */
 @media (max-width: 1024px) {
     .contact-grid {
         grid-template-columns: 1fr;
@@ -2660,6 +2804,30 @@ a, button, input, textarea, select {
     }
 }
 
+/* Small tablets */
+@media (max-width: 900px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    .skills-container {
+        gap: 2rem;
+    }
+}
+
+/* Mobile devices */
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -2737,6 +2905,20 @@ a, button, input, textarea, select {
         padding: 0 1rem;
     }
     
+    /* Improved mobile spacing */
+    section {
+        padding: 3rem 0;
+    }
+    
+    .page-header {
+        padding: 100px 0 3rem;
+    }
+    
+    .hero {
+        padding-top: 100px;
+        min-height: 90vh;
+    }
+    
     /* Mobile-specific animations */
     .work-item:active {
         transform: scale(0.98);
@@ -2798,6 +2980,28 @@ a, button, input, textarea, select {
     }
 }
 
+/* Large phones */
+@media (max-width: 600px) {
+    .nav-menu .nav-link {
+        font-size: 1.25rem;
+        padding: 1.25rem 2rem;
+    }
+    
+    .work-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .work-item {
+        margin: 0 0.5rem;
+    }
+    
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}
+
+/* Small phones */
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2rem;
@@ -2863,5 +3067,151 @@ a, button, input, textarea, select {
         [dir="rtl"] .work-item:hover {
             transform: translateY(-4px);
         }
+        
+        /* Extra small screens optimizations */
+        .container {
+            padding: 0 0.75rem;
+        }
+        
+        .hero-title {
+            font-size: 1.75rem;
+            line-height: 1.3;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            font-size: 2rem;
+        }
+        
+        .work-item {
+            margin: 0;
+            border-radius: var(--border-radius);
+        }
+        
+        .work-content {
+            padding: 1.25rem;
+        }
+        
+        .btn {
+            font-size: 1rem;
+            padding: 14px 20px;
+        }
+        
+        .avatar-placeholder {
+            width: 120px;
+            height: 120px;
+            font-size: 1.5rem;
+        }
+        
+        /* Better mobile form styling */
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem;
+            font-size: 1rem;
+        }
+        
+        .contact-method {
+            padding: 1.25rem;
+            flex-direction: row;
+            text-align: left;
+        }
+        
+        .method-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.25rem;
+        }
+    }
+}
+
+/* Ultra-wide screens */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1300px;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr 350px;
+        gap: 5rem;
+    }
+    
+    .work-grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2.5rem;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .avatar-placeholder,
+    .project-placeholder {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        padding-top: 80px;
+    }
+    
+    .nav-menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1rem 0;
+    }
+    
+    .nav-menu .nav-link {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .hamburger,
+    .language-selector,
+    .cta-section,
+    .social-section {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        color: black;
+        background: white;
+    }
+    
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        color: black;
+    }
+    
+    .work-item,
+    .contact-method,
+    .highlight-item {
+        page-break-inside: avoid;
+        border: 1px solid #ccc;
+        margin-bottom: 1rem;
     }
 }

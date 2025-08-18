@@ -28,6 +28,7 @@ if (hamburger && navMenu) {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
         body.classList.toggle('menu-open');
+        body.classList.toggle('nav-open');
         
         // Accessibility: Update aria attributes
         const isExpanded = hamburger.classList.contains('active');
@@ -41,6 +42,7 @@ if (hamburger && navMenu) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
             body.classList.remove('menu-open');
+            body.classList.remove('nav-open');
             hamburger.setAttribute('aria-expanded', 'false');
         }
     });
@@ -51,6 +53,7 @@ if (hamburger && navMenu) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
             body.classList.remove('menu-open');
+            body.classList.remove('nav-open');
             hamburger.setAttribute('aria-expanded', 'false');
         }
     });
@@ -64,6 +67,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
             body.classList.remove('menu-open');
+            body.classList.remove('nav-open');
             hamburger.setAttribute('aria-expanded', 'false');
         }
         
@@ -523,6 +527,27 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Performance: Use passive listeners for scroll events
     window.addEventListener('scroll', debouncedScrollHandler, { passive: true });
+    
+    // Add touch event handling for better mobile experience
+    if ('ontouchstart' in window) {
+        document.body.classList.add('touch-device');
+        
+        // Improve touch scrolling on iOS
+        document.body.style.webkitOverflowScrolling = 'touch';
+        
+        // Add touch feedback to interactive elements
+        document.querySelectorAll('.btn, .work-item, .social-card, .contact-method').forEach(el => {
+            el.addEventListener('touchstart', function() {
+                this.classList.add('touch-active');
+            }, { passive: true });
+            
+            el.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.classList.remove('touch-active');
+                }, 150);
+            }, { passive: true });
+        });
+    }
     
     // Add resize handler for responsive adjustments
     window.addEventListener('resize', debounce(() => {
