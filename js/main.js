@@ -13,7 +13,24 @@ document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', 
     navMenu.classList.remove('active');
 }));
 
-// Smooth scrolling for navigation links
+// Handle page navigation for multi-page portfolio
+function initializePageNavigation() {
+    // Set active navigation link based on current page
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentPage || 
+            (currentPage === '' && linkHref === 'index.html') ||
+            (currentPage === 'index.html' && linkHref === 'index.html')) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Smooth scrolling for same-page anchor links only
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -27,10 +44,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Active navigation highlighting
+// Active navigation highlighting (only for single-page navigation)
 function updateActiveNav() {
+    // Only run on pages with sections (like the original single-page layout)
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+    if (sections.length === 0) return;
+    
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    if (navLinks.length === 0) return;
     
     let current = '';
     
@@ -95,16 +116,70 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Initialize active nav
+    // Initialize page-specific functionality
+    initializePageNavigation();
     updateActiveNav();
     updateNavbar();
+    
+    // Initialize contact form if it exists
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactForm);
+    }
+    
+    // Initialize skill bar animations if they exist
+    animateSkillBars();
 });
 
-// Contact form handling (if you add a form later)
+// Contact form handling
 function handleContactForm(event) {
     event.preventDefault();
-    // Add your contact form handling logic here
-    console.log('Contact form submitted');
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Get form values
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const subject = formData.get('subject');
+    const message = formData.get('message');
+    const projectType = formData.get('project-type');
+    
+    // Create email body
+    let emailBody = `Hello Amir,\n\n`;
+    emailBody += `Name: ${name}\n`;
+    emailBody += `Email: ${email}\n`;
+    if (projectType) {
+        emailBody += `Project Type: ${projectType}\n`;
+    }
+    emailBody += `\nMessage:\n${message}\n\n`;
+    emailBody += `Best regards,\n${name}`;
+    
+    // Create mailto link
+    const mailtoLink = `mailto:amirsalahshur2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+}
+
+// Skill progress bar animation
+function animateSkillBars() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBar = entry.target;
+                const progress = progressBar.getAttribute('data-progress');
+                progressBar.style.width = progress + '%';
+                observer.unobserve(progressBar);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    skillBars.forEach(bar => {
+        observer.observe(bar);
+    });
 }
 
 // Typing animation for hero title (optional enhancement)
