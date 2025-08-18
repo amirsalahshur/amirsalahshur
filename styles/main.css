@@ -18,6 +18,12 @@
     --transition-fast: 0.2s ease;
     --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* RTL-specific variables */
+    --rtl-spacing: 0.15em;
+    --arabic-line-height: 1.9;
+    --persian-line-height: 2.0;
+    --rtl-border-radius: 12px;
 }
 
 /* Smooth scrolling */
@@ -461,6 +467,207 @@ html {
 [dir="rtl"] .confirmation-flag {
     margin-right: 0;
     margin-left: 0.5rem;
+}
+
+/* Advanced RTL Typography Features */
+/* Arabic and Persian numeral support */
+[lang="ar"] {
+    font-variant-numeric: proportional-nums;
+    font-feature-settings: 'tnum' 0, 'pnum' 1;
+}
+
+[lang="fa"] {
+    font-variant-numeric: proportional-nums;
+    font-feature-settings: 'tnum' 0, 'pnum' 1;
+}
+
+/* Arabic numeral conversion for UI elements */
+[lang="ar"] .stat-number,
+[lang="ar"] .skill-progress::after,
+[lang="ar"] .timeline-date {
+    direction: ltr;
+    unicode-bidi: embed;
+}
+
+[lang="fa"] .stat-number,
+[lang="fa"] .skill-progress::after,
+[lang="fa"] .timeline-date {
+    direction: ltr;
+    unicode-bidi: embed;
+}
+
+/* Contextual alternates for better Arabic text flow */
+[lang="ar"] {
+    font-feature-settings: 'calt' 1, 'liga' 1, 'rlig' 1, 'kern' 1;
+    text-rendering: optimizeQuality;
+}
+
+/* Enhanced Persian kashida and ligature support */
+[lang="fa"] {
+    font-feature-settings: 'calt' 1, 'liga' 1, 'kern' 1;
+    text-rendering: optimizeQuality;
+}
+
+/* Better RTL punctuation handling */
+[lang="ar"] .work-description::after,
+[lang="fa"] .work-description::after,
+[lang="ar"] .intro-description::after,
+[lang="fa"] .intro-description::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+}
+
+/* RTL-specific text shadows and effects */
+[lang="ar"] .hero-title,
+[lang="fa"] .hero-title {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Advanced RTL list styling */
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+    padding-right: 1.5rem;
+    padding-left: 0;
+}
+
+[dir="rtl"] li {
+    text-align: right;
+}
+
+[dir="rtl"] li::marker {
+    unicode-bidi: isolate;
+}
+
+/* RTL table support */
+[dir="rtl"] table {
+    direction: rtl;
+}
+
+[dir="rtl"] th,
+[dir="rtl"] td {
+    text-align: right;
+}
+
+[dir="rtl"] th:first-child,
+[dir="rtl"] td:first-child {
+    border-right: none;
+    border-left: 1px solid var(--border-color);
+}
+
+/* Enhanced RTL code blocks and monospace */
+[dir="rtl"] code,
+[dir="rtl"] pre {
+    direction: ltr;
+    unicode-bidi: embed;
+    text-align: left;
+}
+
+/* RTL-aware flexbox utilities */
+.rtl-flex-start {
+    justify-content: flex-start;
+}
+
+[dir="rtl"] .rtl-flex-start {
+    justify-content: flex-end;
+}
+
+.rtl-flex-end {
+    justify-content: flex-end;
+}
+
+[dir="rtl"] .rtl-flex-end {
+    justify-content: flex-start;
+}
+
+/* RTL-specific margin and padding utilities */
+.mr-auto-rtl {
+    margin-right: auto;
+}
+
+[dir="rtl"] .mr-auto-rtl {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.ml-auto-rtl {
+    margin-left: auto;
+}
+
+[dir="rtl"] .ml-auto-rtl {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+/* RTL form validation and error messages */
+[dir="rtl"] .error-message {
+    text-align: right;
+    direction: rtl;
+}
+
+[dir="rtl"] .success-message {
+    text-align: right;
+    direction: rtl;
+}
+
+/* RTL tooltip positioning */
+[dir="rtl"] [data-tooltip] {
+    position: relative;
+}
+
+[dir="rtl"] [data-tooltip]::after {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+[dir="rtl"] [data-tooltip]::before {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+/* Enhanced RTL animation performance */
+[dir="rtl"] * {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+/* RTL-specific print styles */
+@media print {
+    [dir="rtl"] * {
+        direction: rtl !important;
+        text-align: right !important;
+    }
+    
+    [dir="rtl"] .nav-menu,
+    [dir="rtl"] .hamburger,
+    [dir="rtl"] .language-selector {
+        display: none !important;
+    }
+}
+
+/* RTL accessibility improvements */
+[dir="rtl"] .sr-only {
+    direction: rtl;
+}
+
+[dir="rtl"] [aria-label] {
+    direction: rtl;
+}
+
+/* High contrast mode support for RTL */
+@media (prefers-contrast: high) {
+    [lang="ar"] *,
+    [lang="fa"] * {
+        font-weight: 500;
+        text-shadow: none;
+    }
+    
+    [dir="rtl"] .btn {
+        border: 2px solid currentColor;
+    }
 }
 
 /* Focus styles for accessibility */
@@ -2644,6 +2851,17 @@ a, button, input, textarea, select {
         .hero::before,
         .hero::after {
             display: none;
+        }
+        
+        /* Disable complex RTL animations on mobile for performance */
+        [dir="rtl"] .btn-secondary:hover::after {
+            animation: none;
+            width: 100%;
+        }
+        
+        /* RTL performance optimizations for mobile */
+        [dir="rtl"] .work-item:hover {
+            transform: translateY(-4px);
         }
     }
 }

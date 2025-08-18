@@ -164,6 +164,35 @@ class I18n {
         const isRTL = this.rtlLanguages.includes(this.currentLanguage);
         document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
         document.body.classList.toggle('rtl', isRTL);
+        
+        // Enhanced RTL support
+        if (isRTL) {
+            document.body.style.fontFamily = this.getRTLFontFamily();
+            document.body.classList.add('rtl-active');
+            
+            // Update CSS custom properties for RTL
+            document.documentElement.style.setProperty('--text-align', 'right');
+            document.documentElement.style.setProperty('--flex-direction', 'row-reverse');
+            
+            // Add language-specific classes for typography
+            document.body.classList.remove('lang-ar', 'lang-fa', 'lang-en', 'lang-ru', 'lang-de', 'lang-fr', 'lang-zh');
+            document.body.classList.add(`lang-${this.currentLanguage}`);
+            
+        } else {
+            document.body.style.fontFamily = '';
+            document.body.classList.remove('rtl-active');
+            
+            // Reset CSS custom properties
+            document.documentElement.style.setProperty('--text-align', 'left');
+            document.documentElement.style.setProperty('--flex-direction', 'row');
+            
+            // Add language-specific classes for typography
+            document.body.classList.remove('lang-ar', 'lang-fa', 'lang-en', 'lang-ru', 'lang-de', 'lang-fr', 'lang-zh');
+            document.body.classList.add(`lang-${this.currentLanguage}`);
+        }
+        
+        // Trigger layout recalculation for better rendering
+        this.optimizeRTLRendering();
     }
     
     updateLanguageSelector() {
@@ -195,6 +224,65 @@ class I18n {
     
     getCurrentLanguage() {
         return this.currentLanguage;
+    }
+    
+    getRTLFontFamily() {
+        const fontMap = {
+            'ar': "'Noto Sans Arabic', 'Amiri', 'Traditional Arabic', 'Tahoma', sans-serif",
+            'fa': "'Vazir', 'Noto Sans Arabic', 'IRANSans', 'Tahoma', sans-serif"
+        };
+        return fontMap[this.currentLanguage] || '';
+    }
+    
+    optimizeRTLRendering() {
+        // Force layout recalculation for RTL changes
+        if (this.rtlLanguages.includes(this.currentLanguage)) {
+            // Temporarily hide body to prevent flickering
+            document.body.style.visibility = 'hidden';
+            
+            // Force reflow
+            document.body.offsetHeight;
+            
+            // Re-show body with smooth transition
+            setTimeout(() => {
+                document.body.style.visibility = 'visible';
+                document.body.classList.add('rtl-rendered');
+            }, 50);
+            
+            // Optimize Arabic/Persian text rendering
+            this.optimizeTextRendering();
+        }
+    }
+    
+    optimizeTextRendering() {
+        if (this.currentLanguage === 'ar' || this.currentLanguage === 'fa') {
+            // Enable advanced text features for better Arabic/Persian rendering
+            const elements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div');
+            elements.forEach(element => {
+                if (element.textContent.trim()) {
+                    element.style.fontFeatureSettings = "'liga' 1, 'calt' 1, 'kern' 1";
+                    element.style.textRendering = 'optimizeQuality';
+                    
+                    // Add subtle text shadow for better readability
+                    if (['H1', 'H2', 'H3'].includes(element.tagName)) {
+                        element.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.1)';
+                    }
+                }
+            });
+            
+            // Handle number display in Arabic/Persian contexts
+            this.handleNumericContent();
+        }
+    }
+    
+    handleNumericContent() {
+        // Convert Western numerals to appropriate script if needed
+        const numericElements = document.querySelectorAll('.stat-number, .timeline-date, .skill-progress');
+        numericElements.forEach(element => {
+            // Keep Western numerals but ensure proper direction
+            element.style.direction = 'ltr';
+            element.style.unicodeBidi = 'embed';
+        });
     }
     
     getSupportedLanguages() {
