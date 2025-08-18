@@ -1,0 +1,400 @@
+/* RTL/LTR and Internationalization Styles */
+
+/* RTL Base Styles */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="ltr"] {
+  text-align: left;
+}
+
+/* Arabic Language Specific Styles */
+html[lang="ar"],
+html[lang="ar"] body,
+.lang-ar {
+  font-family: 'Amiri', 'Noto Sans Arabic', 'Arial Unicode MS', sans-serif;
+  line-height: var(--arabic-line-height);
+  letter-spacing: var(--rtl-spacing);
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] h5,
+html[lang="ar"] h6,
+.lang-ar h1,
+.lang-ar h2,
+.lang-ar h3,
+.lang-ar h4,
+.lang-ar h5,
+.lang-ar h6 {
+  font-family: 'Amiri', 'Noto Sans Arabic', serif;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.4;
+}
+
+/* Persian/Farsi Language Specific Styles */
+html[lang="fa"],
+html[lang="fa"] body,
+.lang-fa {
+  font-family: 'Vazirmatn', 'Noto Sans Persian', 'Tahoma', sans-serif;
+  line-height: var(--persian-line-height);
+  letter-spacing: var(--rtl-spacing);
+}
+
+html[lang="fa"] h1,
+html[lang="fa"] h2,
+html[lang="fa"] h3,
+html[lang="fa"] h4,
+html[lang="fa"] h5,
+html[lang="fa"] h6,
+.lang-fa h1,
+.lang-fa h2,
+.lang-fa h3,
+.lang-fa h4,
+.lang-fa h5,
+.lang-fa h6 {
+  font-family: 'Vazirmatn', 'Noto Sans Persian', serif;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.5;
+}
+
+/* Chinese Language Specific Styles */
+html[lang="zh"],
+html[lang="zh"] body,
+.lang-zh {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  line-height: 1.7;
+}
+
+html[lang="zh"] h1,
+html[lang="zh"] h2,
+html[lang="zh"] h3,
+html[lang="zh"] h4,
+html[lang="zh"] h5,
+html[lang="zh"] h6,
+.lang-zh h1,
+.lang-zh h2,
+.lang-zh h3,
+.lang-zh h4,
+.lang-zh h5,
+.lang-zh h6 {
+  font-family: 'Noto Sans SC', 'PingFang SC', serif;
+  line-height: 1.4;
+}
+
+/* Russian Language Specific Styles */
+html[lang="ru"],
+html[lang="ru"] body,
+.lang-ru {
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* German Language Specific Styles */
+html[lang="de"],
+html[lang="de"] body,
+.lang-de {
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* French Language Specific Styles */
+html[lang="fr"],
+html[lang="fr"] body,
+.lang-fr {
+  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* RTL Layout Adjustments */
+[dir="rtl"] .hero-content {
+  text-align: center;
+}
+
+[dir="rtl"] .nav-logo {
+  order: 2;
+}
+
+[dir="rtl"] .nav-menu {
+  order: 1;
+}
+
+[dir="rtl"] .hamburger {
+  order: 0;
+}
+
+[dir="rtl"] .nav-language-selector {
+  margin-left: 0;
+  margin-right: var(--space-4);
+}
+
+/* RTL Button and Link Adjustments */
+[dir="rtl"] .btn {
+  text-align: center;
+}
+
+[dir="rtl"] .work-item-links {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .social-links {
+  justify-content: center;
+}
+
+/* RTL Form Adjustments */
+[dir="rtl"] .form-label {
+  text-align: right;
+}
+
+[dir="rtl"] .form-input,
+[dir="rtl"] .form-textarea {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .form-input::placeholder,
+[dir="rtl"] .form-textarea::placeholder {
+  text-align: right;
+}
+
+/* RTL Navigation Menu Adjustments */
+[dir="rtl"] .nav-link::after {
+  left: 50%;
+  right: auto;
+}
+
+[dir="rtl"] .language-dropdown {
+  right: auto;
+  left: 0;
+}
+
+@media (max-width: 768px) {
+  [dir="rtl"] .nav-link.active {
+    border-left: none;
+    border-right: 4px solid var(--color-primary);
+  }
+}
+
+/* RTL Timeline Adjustments */
+[dir="rtl"] .timeline-item {
+  padding-left: 0;
+  padding-right: var(--space-12);
+}
+
+[dir="rtl"] .timeline-item::before {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .timeline-dot {
+  left: auto;
+  right: -6px;
+}
+
+/* RTL Work Grid and Cards */
+[dir="rtl"] .work-item-tech {
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .tech-tag {
+  text-align: center;
+}
+
+/* RTL Contact Methods */
+[dir="rtl"] .contact-method {
+  text-align: right;
+}
+
+[dir="rtl"] .contact-method-content {
+  text-align: right;
+}
+
+/* Numeric and Mixed Content Handling */
+.numeric-content {
+  direction: ltr;
+  text-align: left;
+  display: inline-block;
+}
+
+[dir="rtl"] .numeric-content {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Email and URL styling for RTL */
+.email-content,
+.url-content {
+  direction: ltr;
+  text-align: left;
+  display: inline-block;
+  unicode-bidi: embed;
+}
+
+[dir="rtl"] .email-content,
+[dir="rtl"] .url-content {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: embed;
+}
+
+/* Language-specific text sizes for better readability */
+.lang-ar .hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+}
+
+.lang-fa .hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.3;
+}
+
+.lang-zh .hero-title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.3;
+}
+
+/* RTL-specific border radius adjustments */
+[dir="rtl"] .card,
+[dir="rtl"] .work-item,
+[dir="rtl"] .contact-method {
+  border-radius: var(--rtl-border-radius);
+}
+
+[dir="rtl"] .btn {
+  border-radius: var(--rtl-border-radius);
+}
+
+/* Punctuation and typography adjustments for RTL languages */
+.lang-ar .hero-subtitle::after,
+.lang-fa .hero-subtitle::after {
+  content: "";
+}
+
+/* Text selection for RTL languages */
+.lang-ar ::selection,
+.lang-fa ::selection {
+  direction: rtl;
+}
+
+/* Input and textarea direction for RTL languages */
+.lang-ar input,
+.lang-ar textarea,
+.lang-fa input,
+.lang-fa textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+.lang-ar input::placeholder,
+.lang-ar textarea::placeholder,
+.lang-fa input::placeholder,
+.lang-fa textarea::placeholder {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Language-specific quotation marks */
+.lang-ar q::before { content: "«"; }
+.lang-ar q::after { content: "»"; }
+.lang-fa q::before { content: "«"; }
+.lang-fa q::after { content: "»"; }
+.lang-de q::before { content: "„"; }
+.lang-de q::after { content: """; }
+.lang-fr q::before { content: "«\00a0"; }
+.lang-fr q::after { content: "\00a0»"; }
+.lang-ru q::before { content: "«"; }
+.lang-ru q::after { content: "»"; }
+.lang-zh q::before { content: """; }
+.lang-zh q::after { content: """; }
+
+/* Loading and transition states for language switching */
+.language-switching {
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity var(--transition-smooth);
+}
+
+.language-switch-fade-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.language-switch-fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all var(--transition-smooth);
+}
+
+.language-switch-fade-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.language-switch-fade-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all var(--transition-smooth);
+}
+
+/* Print styles for multilingual content */
+@media print {
+  .lang-ar,
+  .lang-fa {
+    font-size: 12pt;
+    line-height: 1.6;
+  }
+  
+  [dir="rtl"] {
+    text-align: right;
+  }
+}
+
+/* High contrast mode for multilingual text */
+@media (prefers-contrast: high) {
+  .lang-ar,
+  .lang-fa,
+  .lang-zh {
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+/* Font loading optimization for international fonts */
+@font-face {
+  font-family: 'Amiri';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Amiri Regular'), local('Amiri-Regular');
+}
+
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Vazirmatn Regular'), local('Vazirmatn-Regular');
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Noto Sans SC Regular'), local('NotoSansSC-Regular');
+}
+
+/* Language indicator for screen readers */
+.language-indicator {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -4,15 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Amir Salahshur - Featured Work and Projects">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#6366f1" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1e1b4b" media="(prefers-color-scheme: dark)">
     <title>Work - Amir Salahshur</title>
-    <link rel="stylesheet" href="styles/main.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles/variables.css" as="style">
+    <link rel="preload" href="styles/base.css" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <!-- Performance and theme management -->
+    <script src="js/performance.js" defer></script>
+    <script src="js/theme-manager.js" defer></script>
     <script src="js/i18n.js" defer></script>
     <script src="js/language-selector.js" defer></script>
 </head>
-<body>
+<body class="loading">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress"></div>
+    
+    <!-- Page transition overlay -->
+    <div class="page-transition">
+        <div class="spinner"></div>
+        <div>Loading...</div>
+    </div>
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -40,21 +64,21 @@
         </div>
     </nav>
 
-    <main>
-        <section class="page-header">
+    <main id="main">
+        <section class="page-header scroll-animate">
             <div class="container">
-                <h1 class="page-title" data-i18n="work.title">My Work</h1>
-                <p class="page-subtitle" data-i18n="work.subtitle">
+                <h1 class="page-title animate-fade-in-up" data-i18n="work.title">My Work</h1>
+                <p class="page-subtitle animate-fade-in-up animate-delay-200" data-i18n="work.subtitle">
                     A collection of projects showcasing my skills in modern web development, 
                     problem-solving, and innovative solutions.
                 </p>
             </div>
         </section>
 
-        <section class="work-showcase">
+        <section class="work-showcase scroll-animate">
             <div class="container">
-                <div class="work-grid">
-                    <div class="work-item featured">
+                <div class="work-grid scroll-animate-scale animate-delay-300">
+                    <div class="work-item featured scroll-animate-scale" data-stagger>
                         <div class="work-image">
                             <div class="project-placeholder">
                                 <span>React App</span>
@@ -82,7 +106,7 @@
                         </div>
                     </div>
 
-                    <div class="work-item">
+                    <div class="work-item scroll-animate-scale" data-stagger>
                         <div class="work-image">
                             <div class="project-placeholder">
                                 <span>API</span>
@@ -109,7 +133,7 @@
                         </div>
                     </div>
 
-                    <div class="work-item">
+                    <div class="work-item scroll-animate-scale" data-stagger>
                         <div class="work-image">
                             <div class="project-placeholder">
                                 <span>Next.js</span>
@@ -136,7 +160,7 @@
                         </div>
                     </div>
 
-                    <div class="work-item">
+                    <div class="work-item scroll-animate-scale" data-stagger>
                         <div class="work-image">
                             <div class="project-placeholder">
                                 <span>Python</span>
@@ -163,7 +187,7 @@
                         </div>
                     </div>
 
-                    <div class="work-item">
+                    <div class="work-item scroll-animate-scale" data-stagger>
                         <div class="work-image">
                             <div class="project-placeholder">
                                 <span>Mobile</span>
@@ -190,7 +214,7 @@
                         </div>
                     </div>
 
-                    <div class="work-item">
+                    <div class="work-item scroll-animate-scale" data-stagger>
                         <div class="work-image">
                             <div class="project-placeholder">
                                 <span>Crypto</span>
@@ -220,9 +244,9 @@
             </div>
         </section>
 
-        <section class="cta-section">
+        <section class="cta-section scroll-animate">
             <div class="container">
-                <div class="cta-content">
+                <div class="cta-content animate-fade-in-up">
                     <h2>Interested in Working Together?</h2>
                     <p>I'm always open to discussing new opportunities and exciting projects.</p>
                     <a href="contact.html" class="btn btn-primary">Get In Touch</a>
@@ -239,5 +263,20 @@
     </footer>
 
     <script src="js/main.js"></script>
+    
+    <!-- Initialize performance optimizations -->
+    <script>
+        // Mark page as loaded
+        window.addEventListener('load', () => {
+            document.body.classList.remove('loading');
+            document.body.classList.add('loaded');
+        });
+        
+        // Initialize theme-aware content
+        if (typeof themeManager !== 'undefined') {
+            themeManager.initThemeAwareContent();
+            themeManager.loadThemeAwareImages();
+        }
+    </script>
 </body>
 </html>
