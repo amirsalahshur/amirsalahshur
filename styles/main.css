@@ -1,0 +1,508 @@
+/* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fafafa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo a {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #666;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #333;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.highlight {
+    color: #4285f4;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: #333;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #555;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #333;
+    border-color: #333;
+}
+
+.btn-secondary:hover {
+    background-color: #333;
+    color: white;
+}
+
+.hero-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-placeholder {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4285f4, #34a853);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Styles */
+section {
+    padding: 5rem 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #333;
+}
+
+/* Work Section */
+.work {
+    background-color: white;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.work-item {
+    background-color: #fafafa;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.work-image {
+    height: 200px;
+    background-color: #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-placeholder {
+    background: linear-gradient(135deg, #333, #666);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.work-content {
+    padding: 1.5rem;
+}
+
+.work-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.work-description {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.work-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: #e5e5e5;
+    color: #333;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.work-link {
+    color: #4285f4;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.work-link:hover {
+    color: #333;
+}
+
+/* About Section */
+.about {
+    background-color: #f8f9fa;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.about-description {
+    font-size: 1.125rem;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.about-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.highlight-item h4 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.highlight-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.about-skills h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.skill-category h4 {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.skills-list {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.skill {
+    background-color: white;
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid #e5e5e5;
+    transition: all 0.3s ease;
+}
+
+.skill:hover {
+    background-color: #333;
+    color: white;
+}
+
+/* Contact Section */
+.contact {
+    background-color: white;
+}
+
+.contact-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-description {
+    font-size: 1.125rem;
+    color: #666;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+}
+
+.contact-methods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.contact-item h4 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.contact-link {
+    color: #4285f4;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+    color: #333;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e5e5;
+}
+
+.social-link:hover {
+    background-color: #333;
+    color: white;
+}
+
+/* Footer */
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.footer-quote {
+    margin-top: 0.5rem;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 2rem 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-cta {
+        justify-content: center;
+    }
+
+    .avatar-placeholder {
+        width: 150px;
+        height: 150px;
+        font-size: 2rem;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contact-methods {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .work-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-grid {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+        max-width: 200px;
+    }
+}
