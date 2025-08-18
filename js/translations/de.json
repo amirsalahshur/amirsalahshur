@@ -1,76 +1,68 @@
 {
   "page_title_home": "Amir Salahshur - Portfolio",
-  "page_title_work": "Amir Salahshur - Arbeit",
+  "page_title_work": "Amir Salahshur - Meine Projekte",
   "page_title_about": "Amir Salahshur - Über mich",
   "page_title_contact": "Amir Salahshur - Kontakt",
-  "meta_description": "Amir Salahshur - Software-Entwickler, Problemlöser, Technologie-Enthusiast",
-  
+  "meta_description": "Amir Salahshur - Softwareentwickler, Problemlöser und Technik-Enthusiast.",
   "nav": {
     "home": "Startseite",
-    "work": "Arbeit",
-    "about": "Über mich", 
+    "work": "Projekte",
+    "about": "Über mich",
     "contact": "Kontakt"
   },
-  
   "hero": {
     "greeting": "Hallo, ich bin",
     "name": "Amir Salahshur",
-    "subtitle": "Leidenschaftlicher Software-Entwickler, der innovative Lösungen mit modernen Technologien entwickelt. Aktiv im IT-Bereich und im Krypto-Bereich.",
-    "view_work": "Meine Arbeit ansehen",
+    "subtitle": "Ein leidenschaftlicher Softwareentwickler, der innovative Lösungen mit modernen Technologien entwickelt. Aktiv im IT-Bereich und in der Krypto-Szene.",
+    "view_work": "Meine Projekte ansehen",
     "get_in_touch": "Kontakt aufnehmen"
   },
-  
   "work": {
-    "title": "Meine Arbeit",
-    "subtitle": "Präsentation meiner neuesten Projekte und Erfolge",
+    "title": "Meine Projekte",
+    "subtitle": "Eine Auswahl meiner neuesten Projekte und Erfolge.",
     "view_project": "Projekt ansehen",
     "live_demo": "Live-Demo",
     "source_code": "Quellcode"
   },
-  
   "about": {
     "title": "Über mich",
-    "subtitle": "Erfahren Sie mehr über meinen Hintergrund und meine Expertise",
-    "description": "Ich bin ein leidenschaftlicher Software-Entwickler mit Expertise in modernen Web-Technologien. Ich löse gerne komplexe Probleme und entwickle innovative Lösungen.",
+    "subtitle": "Erfahren Sie mehr über meinen Hintergrund und meine Fachkenntnisse.",
+    "description": "Ich bin ein leidenschaftlicher Softwareentwickler mit Expertise in modernen Web-Technologien. Ich liebe es, komplexe Probleme zu lösen und innovative Lösungen zu schaffen.",
     "skills": "Fähigkeiten",
-    "experience": "Erfahrung",
-    "education": "Bildung"
+    "experience": "Berufserfahrung",
+    "education": "Ausbildung"
   },
-  
   "contact": {
     "title": "Kontakt aufnehmen",
-    "subtitle": "Lassen Sie uns über Ihr nächstes Projekt sprechen",
+    "subtitle": "Lassen Sie uns über Ihr nächstes Projekt sprechen.",
     "name": "Name",
     "name_placeholder": "Ihr vollständiger Name",
     "email": "E-Mail",
     "email_placeholder": "ihre.email@example.com",
     "subject": "Betreff",
-    "subject_placeholder": "Projektbesprechung",
+    "subject_placeholder": "Projektanfrage",
     "message": "Nachricht",
     "message_placeholder": "Erzählen Sie mir von Ihrem Projekt...",
     "project_type": "Projekttyp",
-    "project_type_placeholder": "Projekttyp auswählen",
+    "project_type_placeholder": "Wählen Sie einen Projekttyp",
     "send_message": "Nachricht senden",
     "form_note_title": "Hinweis:",
     "form_note_text": "Dieses Formular öffnet Ihr Standard-E-Mail-Programm. Sie können mir auch direkt an eine der oben genannten Adressen schreiben.",
     "project_types": {
-      "web": "Web-Entwicklung",
+      "web": "Webentwicklung",
       "mobile": "Mobile App",
       "consulting": "Beratung",
-      "other": "Andere"
+      "other": "Sonstiges"
     }
   },
-  
   "footer": {
     "copyright": "© 2025 Amir Salahshur. Alle Rechte vorbehalten.",
-    "quote": "\"Code ist Poesie, geschrieben in Logik\""
+    "quote": "\"Code ist Poesie, die in Logik geschrieben ist.\""
   },
-  
   "language_selector": {
     "label": "Sprache",
     "select_language": "Sprache auswählen"
   },
-  
   "loading": "Wird geladen...",
   "menu_toggle": "Menü umschalten",
   "close_menu": "Menü schließen",

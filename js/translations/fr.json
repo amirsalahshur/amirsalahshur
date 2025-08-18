@@ -1,58 +1,53 @@
 {
   "page_title_home": "Amir Salahshur - Portfolio",
-  "page_title_work": "Amir Salahshur - Travail",
+  "page_title_work": "Amir Salahshur - Mes projets",
   "page_title_about": "Amir Salahshur - À propos",
   "page_title_contact": "Amir Salahshur - Contact",
-  "meta_description": "Amir Salahshur - Développeur logiciel, résolveur de problèmes, passionné de technologie",
-  
+  "meta_description": "Amir Salahshur - Développeur de logiciels, solutionneur de problèmes et passionné de technologie.",
   "nav": {
     "home": "Accueil",
-    "work": "Travail",
-    "about": "À propos", 
+    "work": "Projets",
+    "about": "À propos",
     "contact": "Contact"
   },
-  
   "hero": {
-    "greeting": "Salut, je suis",
+    "greeting": "Bonjour, je suis",
     "name": "Amir Salahshur",
-    "subtitle": "Développeur logiciel passionné créant des solutions innovantes avec des technologies modernes. Actif dans le domaine informatique et l'espace crypto.",
-    "view_work": "Voir mon travail",
-    "get_in_touch": "Entrer en contact"
+    "subtitle": "Un développeur passionné qui crée des solutions innovantes avec des technologies modernes. Actif dans le domaine de l'informatique et de la crypto-monnaie.",
+    "view_work": "Voir mes projets",
+    "get_in_touch": "Me contacter"
   },
-  
   "work": {
-    "title": "Mon travail",
-    "subtitle": "Présentation de mes derniers projets et réalisations",
+    "title": "Mes projets",
+    "subtitle": "Présentation de mes derniers projets et réalisations.",
     "view_project": "Voir le projet",
     "live_demo": "Démo en direct",
     "source_code": "Code source"
   },
-  
   "about": {
     "title": "À propos de moi",
-    "subtitle": "En savoir plus sur mon parcours et mon expertise",
-    "description": "Je suis un développeur logiciel passionné avec une expertise dans les technologies web modernes. J'aime résoudre des problèmes complexes et créer des solutions innovantes.",
+    "subtitle": "Découvrez mon parcours et mon expertise.",
+    "description": "Je suis un développeur de logiciels passionné, spécialisé dans les technologies web modernes. J'aime résoudre des problèmes complexes et créer des solutions innovantes.",
     "skills": "Compétences",
     "experience": "Expérience",
-    "education": "Éducation"
+    "education": "Formation"
   },
-  
   "contact": {
-    "title": "Entrer en contact",
-    "subtitle": "Discutons de votre prochain projet",
+    "title": "Contactez-moi",
+    "subtitle": "Discutons de votre prochain projet.",
     "name": "Nom",
     "name_placeholder": "Votre nom complet",
     "email": "E-mail",
-    "email_placeholder": "votre.email@exemple.com",
+    "email_placeholder": "votre.email@example.com",
     "subject": "Sujet",
-    "subject_placeholder": "Discussion de projet",
+    "subject_placeholder": "Proposition de projet",
     "message": "Message",
     "message_placeholder": "Parlez-moi de votre projet...",
     "project_type": "Type de projet",
-    "project_type_placeholder": "Sélectionner le type de projet",
+    "project_type_placeholder": "Sélectionnez le type de projet",
     "send_message": "Envoyer le message",
-    "form_note_title": "Note :",
-    "form_note_text": "Ce formulaire ouvrira votre client de messagerie par défaut. Vous pouvez également m’envoyer un e-mail directement à l’une des adresses mentionnées ci-dessus.",
+    "form_note_title": "Remarque :",
+    "form_note_text": "Ce formulaire ouvrira votre client de messagerie par défaut. Vous pouvez également m'envoyer un e-mail directement à l'une des adresses ci-dessus.",
     "project_types": {
       "web": "Développement web",
       "mobile": "Application mobile",
@@ -60,19 +55,16 @@
       "other": "Autre"
     }
   },
-  
   "footer": {
     "copyright": "© 2025 Amir Salahshur. Tous droits réservés.",
-    "quote": "\"Le code est de la poésie écrite en logique\""
+    "quote": "\"Le code est de la poésie écrite avec de la logique.\""
   },
-  
   "language_selector": {
     "label": "Langue",
     "select_language": "Sélectionner la langue"
   },
-  
   "loading": "Chargement...",
-  "menu_toggle": "Basculer le menu",
+  "menu_toggle": "Afficher le menu",
   "close_menu": "Fermer le menu",
   "open_menu": "Ouvrir le menu"
 }

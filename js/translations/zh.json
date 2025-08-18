@@ -1,76 +1,68 @@
 {
   "page_title_home": "阿米尔·萨拉赫舒尔 - 作品集",
-  "page_title_work": "阿米尔·萨拉赫舒尔 - 工作",
+  "page_title_work": "阿米尔·萨拉赫舒尔 - 我的项目",
   "page_title_about": "阿米尔·萨拉赫舒尔 - 关于我",
-  "page_title_contact": "阿米尔·萨拉赫舒尔 - 联系方式",
-  "meta_description": "阿米尔·萨拉赫舒尔 - 软件开发者，问题解决者，技术爱好者",
-  
+  "page_title_contact": "阿米尔·萨拉赫舒尔 - 联系我",
+  "meta_description": "阿米尔·萨拉赫舒尔 - 软件开发者、问题解决者、技术爱好者。",
   "nav": {
     "home": "首页",
-    "work": "工作",
-    "about": "关于我", 
-    "contact": "联系方式"
+    "work": "项目",
+    "about": "关于我",
+    "contact": "联系我"
   },
-  
   "hero": {
-    "greeting": "你好，我是",
+    "greeting": "您好，我是",
     "name": "阿米尔·萨拉赫舒尔",
-    "subtitle": "充满热情的软件开发者，用现代技术打造创新解决方案。活跃于IT领域和加密货币领域。",
-    "view_work": "查看我的作品",
+    "subtitle": "一位充满热情的软件开发者，利用现代技术打造创新解决方案。活跃于IT领域和加密货币行业。",
+    "view_work": "查看我的项目",
     "get_in_touch": "联系我"
   },
-  
   "work": {
-    "title": "我的作品",
-    "subtitle": "展示我最新的项目和成就",
+    "title": "我的项目",
+    "subtitle": "展示我最新的项目与成就。",
     "view_project": "查看项目",
     "live_demo": "在线演示",
     "source_code": "源代码"
   },
-  
   "about": {
     "title": "关于我",
-    "subtitle": "了解更多关于我的背景和专业知识",
-    "description": "我是一名充满热情的软件开发者，专精于现代Web技术。我热爱解决复杂问题和创造创新解决方案。",
+    "subtitle": "进一步了解我的背景与专业技能。",
+    "description": "我是一名充满热情的软件开发者，专注于现代Web技术。我热衷于解决复杂问题并创造创新的解决方案。",
     "skills": "技能",
-    "experience": "经验",
-    "education": "教育"
+    "experience": "工作经历",
+    "education": "教育背景"
   },
-  
   "contact": {
     "title": "联系我",
-    "subtitle": "让我们讨论您的下一个项目",
+    "subtitle": "让我们一起讨论您的下一个项目。",
     "name": "姓名",
     "name_placeholder": "您的全名",
     "email": "邮箱",
     "email_placeholder": "your.email@example.com",
     "subject": "主题",
-    "subject_placeholder": "项目讨论",
+    "subject_placeholder": "项目咨询",
     "message": "信息",
-    "message_placeholder": "告诉我关于您的项目...",
+    "message_placeholder": "请告诉我关于您的项目...",
     "project_type": "项目类型",
     "project_type_placeholder": "选择项目类型",
-    "send_message": "发送消息",
-    "form_note_title": "注意：",
+    "send_message": "发送信息",
+    "form_note_title": "请注意：",
     "form_note_text": "此表单将打开您的默认邮件客户端。您也可以直接发送邮件到上面列出的任一地址。",
     "project_types": {
       "web": "网站开发",
       "mobile": "移动应用",
-      "consulting": "咨询",
+      "consulting": "咨询服务",
       "other": "其他"
     }
   },
-  
   "footer": {
-    "copyright": "© 2025 阿米尔·萨拉赫舒尔。保留所有权利。",
-    "quote": "\"代码是用逻辑写成的诗\""
+    "copyright": "© 2025 阿米尔·萨拉赫舒尔。版权所有。",
+    "quote": "\"代码是用逻辑写成的诗。\""
   },
-  
   "language_selector": {
     "label": "语言",
     "select_language": "选择语言"
   },
-  
   "loading": "加载中...",
   "menu_toggle": "切换菜单",
   "close_menu": "关闭菜单",
