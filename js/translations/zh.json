@@ -1,9 +1,9 @@
 {
-  "page_title_home": "阿米尔·萨拉什尔 - 作品集",
-  "page_title_work": "阿米尔·萨拉什尔 - 工作",
-  "page_title_about": "阿米尔·萨拉什尔 - 关于我",
-  "page_title_contact": "阿米尔·萨拉什尔 - 联系方式",
-  "meta_description": "阿米尔·萨拉什尔 - 软件开发者，问题解决者，技术爱好者",
+  "page_title_home": "阿米尔·萨拉赫舒尔 - 作品集",
+  "page_title_work": "阿米尔·萨拉赫舒尔 - 工作",
+  "page_title_about": "阿米尔·萨拉赫舒尔 - 关于我",
+  "page_title_contact": "阿米尔·萨拉赫舒尔 - 联系方式",
+  "meta_description": "阿米尔·萨拉赫舒尔 - 软件开发者，问题解决者，技术爱好者",
   
   "nav": {
     "home": "首页",
@@ -14,7 +14,7 @@
   
   "hero": {
     "greeting": "你好，我是",
-    "name": "阿米尔·萨拉什尔",
+    "name": "阿米尔·萨拉赫舒尔",
     "subtitle": "充满热情的软件开发者，用现代技术打造创新解决方案。活跃于IT领域和加密货币领域。",
     "view_work": "查看我的作品",
     "get_in_touch": "联系我"
@@ -62,7 +62,7 @@
   },
   
   "footer": {
-    "copyright": "© 2025 阿米尔·萨拉什尔。保留所有权利。",
+    "copyright": "© 2025 阿米尔·萨拉赫舒尔。保留所有权利。",
     "quote": "\"代码是用逻辑写成的诗\""
   },
   
