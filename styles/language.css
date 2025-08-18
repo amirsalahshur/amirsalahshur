@@ -1,6 +1,15 @@
+:root {
+  --font-family-ar: 'Noto Sans Arabic', 'Amiri', 'Traditional Arabic', 'Tahoma', 'Arial Unicode MS', sans-serif;
+  --font-family-fa: 'Vazirmatn', 'Noto Sans Arabic', 'IRANSans', 'Tahoma', 'Arial Unicode MS', sans-serif;
+  --font-family-zh: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Source Han Sans CN', sans-serif;
+  --font-family-ru: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-de: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-fr: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
 /* RTL/LTR and Internationalization Styles */
 
-/* RTL Base Styles */
+/* Base Styles */
 [dir="rtl"] {
   text-align: right;
 }
@@ -9,109 +18,78 @@
   text-align: left;
 }
 
-/* Arabic Language Specific Styles */
-html[lang="ar"],
-html[lang="ar"] body,
-.lang-ar {
-  font-family: 'Amiri', 'Noto Sans Arabic', 'Arial Unicode MS', sans-serif;
-  line-height: var(--arabic-line-height);
-  letter-spacing: var(--rtl-spacing);
+/* Language-specific Styles */
+.lang-ar, html[lang="ar"] {
+  font-family: var(--font-family-ar);
+  line-height: var(--arabic-line-height, 1.8);
+  letter-spacing: var(--rtl-spacing, 0.15em);
+  font-feature-settings: 'liga' 1, 'calt' 1, 'kern' 1;
+  text-rendering: optimizeLegibility;
 }
 
-html[lang="ar"] h1,
-html[lang="ar"] h2,
-html[lang="ar"] h3,
-html[lang="ar"] h4,
-html[lang="ar"] h5,
-html[lang="ar"] h6,
-.lang-ar h1,
-.lang-ar h2,
-.lang-ar h3,
-.lang-ar h4,
-.lang-ar h5,
-.lang-ar h6 {
-  font-family: 'Amiri', 'Noto Sans Arabic', serif;
-  font-weight: var(--font-weight-bold);
-  line-height: 1.4;
+.lang-fa, html[lang="fa"] {
+  font-family: var(--font-family-fa);
+  line-height: var(--persian-line-height, 1.9);
+  letter-spacing: var(--rtl-spacing, 0.15em);
+  font-feature-settings: 'liga' 1, 'calt' 1, 'kern' 1;
+  text-rendering: optimizeLegibility;
 }
 
-/* Persian/Farsi Language Specific Styles */
-html[lang="fa"],
-html[lang="fa"] body,
-.lang-fa {
-  font-family: 'Vazirmatn', 'Noto Sans Persian', 'Tahoma', sans-serif;
-  line-height: var(--persian-line-height);
-  letter-spacing: var(--rtl-spacing);
-}
-
-html[lang="fa"] h1,
-html[lang="fa"] h2,
-html[lang="fa"] h3,
-html[lang="fa"] h4,
-html[lang="fa"] h5,
-html[lang="fa"] h6,
-.lang-fa h1,
-.lang-fa h2,
-.lang-fa h3,
-.lang-fa h4,
-.lang-fa h5,
-.lang-fa h6 {
-  font-family: 'Vazirmatn', 'Noto Sans Persian', serif;
-  font-weight: var(--font-weight-bold);
-  line-height: 1.5;
-}
-
-/* Chinese Language Specific Styles */
-html[lang="zh"],
-html[lang="zh"] body,
-.lang-zh {
-  font-family: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+.lang-zh, html[lang="zh"] {
+  font-family: var(--font-family-zh);
   line-height: 1.7;
+  font-feature-settings: 'kern' 1;
+  text-rendering: optimizeLegibility;
 }
 
-html[lang="zh"] h1,
-html[lang="zh"] h2,
-html[lang="zh"] h3,
-html[lang="zh"] h4,
-html[lang="zh"] h5,
-html[lang="zh"] h6,
-.lang-zh h1,
-.lang-zh h2,
-.lang-zh h3,
-.lang-zh h4,
-.lang-zh h5,
-.lang-zh h6 {
-  font-family: 'Noto Sans SC', 'PingFang SC', serif;
+.lang-ru, html[lang="ru"] {
+  font-family: var(--font-family-ru);
+  line-height: 1.6;
+}
+
+.lang-de, html[lang="de"] {
+  font-family: var(--font-family-de);
+  line-height: 1.6;
+}
+
+.lang-fr, html[lang="fr"] {
+  font-family: var(--font-family-fr);
+  line-height: 1.6;
+}
+
+/* Heading Styles */
+.lang-ar h1, .lang-ar h2, .lang-ar h3, .lang-ar h4, .lang-ar h5, .lang-ar h6,
+html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, html[lang="ar"] h4, html[lang="ar"] h5, html[lang="ar"] h6 {
+  font-family: var(--font-family-ar);
+  font-weight: var(--font-weight-bold, 700);
   line-height: 1.4;
+  font-feature-settings: 'liga' 1, 'calt' 1, 'kern' 1;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Russian Language Specific Styles */
-html[lang="ru"],
-html[lang="ru"] body,
-.lang-ru {
-  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.6;
+.lang-fa h1, .lang-fa h2, .lang-fa h3, .lang-fa h4, .lang-fa h5, .lang-fa h6,
+html[lang="fa"] h1, html[lang="fa"] h2, html[lang="fa"] h3, html[lang="fa"] h4, html[lang="fa"] h5, html[lang="fa"] h6 {
+  font-family: var(--font-family-fa);
+  font-weight: var(--font-weight-bold, 700);
+  line-height: 1.5;
+  font-feature-settings: 'liga' 1, 'calt' 1, 'kern' 1;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* German Language Specific Styles */
-html[lang="de"],
-html[lang="de"] body,
-.lang-de {
-  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.6;
-}
-
-/* French Language Specific Styles */
-html[lang="fr"],
-html[lang="fr"] body,
-.lang-fr {
-  font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.6;
+.lang-zh h1, .lang-zh h2, .lang-zh h3, .lang-zh h4, .lang-zh h5, .lang-zh h6,
+html[lang="zh"] h1, html[lang="zh"] h2, html[lang="zh"] h3, html[lang="zh"] h4, html[lang="zh"] h5, html[lang="zh"] h6 {
+  font-family: var(--font-family-zh);
+  line-height: 1.4;
+  font-weight: var(--font-weight-bold, 700);
+  font-feature-settings: 'kern' 1;
+  text-rendering: optimizeLegibility;
 }
 
 /* RTL Layout Adjustments */
-[dir="rtl"] .hero-content {
-  text-align: center;
+[dir="rtl"] .hero-content, [dir="rtl"] .btn, [dir="rtl"] .work-item-tech, [dir="rtl"] .social-links, [dir="rtl"] .form-label, [dir="rtl"] .form-input, [dir="rtl"] .form-textarea, [dir="rtl"] .contact-method, [dir="rtl"] .contact-method-content, [dir="rtl"] .tech-tag {
+  text-align: right;
 }
 
 [dir="rtl"] .nav-logo {
@@ -131,36 +109,18 @@ html[lang="fr"] body,
   margin-right: var(--space-4);
 }
 
-/* RTL Button and Link Adjustments */
-[dir="rtl"] .btn {
-  text-align: center;
-}
-
 [dir="rtl"] .work-item-links {
   justify-content: flex-start;
 }
 
-[dir="rtl"] .social-links {
-  justify-content: center;
-}
-
-/* RTL Form Adjustments */
-[dir="rtl"] .form-label {
-  text-align: right;
-}
-
-[dir="rtl"] .form-input,
-[dir="rtl"] .form-textarea {
-  text-align: right;
+[dir="rtl"] .form-input, [dir="rtl"] .form-textarea {
   direction: rtl;
 }
 
-[dir="rtl"] .form-input::placeholder,
-[dir="rtl"] .form-textarea::placeholder {
+[dir="rtl"] .form-input::placeholder, [dir="rtl"] .form-textarea::placeholder {
   text-align: right;
 }
 
-/* RTL Navigation Menu Adjustments */
 [dir="rtl"] .nav-link::after {
   left: 50%;
   right: auto;
@@ -192,24 +152,6 @@ html[lang="fr"] body,
 [dir="rtl"] .timeline-dot {
   left: auto;
   right: -6px;
-}
-
-/* RTL Work Grid and Cards */
-[dir="rtl"] .work-item-tech {
-  justify-content: flex-end;
-}
-
-[dir="rtl"] .tech-tag {
-  text-align: center;
-}
-
-/* RTL Contact Methods */
-[dir="rtl"] .contact-method {
-  text-align: right;
-}
-
-[dir="rtl"] .contact-method-content {
-  text-align: right;
 }
 
 /* Numeric and Mixed Content Handling */
@@ -356,34 +298,85 @@ html[lang="fr"] body,
 @media (prefers-contrast: high) {
   .lang-ar,
   .lang-fa,
-  .lang-zh {
+.lang-zh {
     font-weight: var(--font-weight-medium);
   }
 }
 
-/* Font loading optimization for international fonts */
+/* Enhanced Font Loading with CDN Fallbacks */
+/* Arabic Font - Noto Sans Arabic with fallbacks */
 @font-face {
-  font-family: 'Amiri';
+  font-family: 'Noto Sans Arabic';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Amiri Regular'), local('Amiri-Regular');
+  src: url('https://fonts.gstatic.com/s/notosansarabic/v18/nwpxtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlhQ5l3sQWIHPqzCfyG2mubAq.woff2') format('woff2'),
+       local('Noto Sans Arabic Regular'), 
+       local('NotoSansArabic-Regular'),
+       local('Amiri Regular'), 
+       local('Amiri-Regular');
+  unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
 }
 
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/notosansarabic/v18/nwpxtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlhQ5l3sQWIHPqzCfyGWgpvIq.woff2') format('woff2'),
+       local('Noto Sans Arabic Bold'), 
+       local('NotoSansArabic-Bold');
+  unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
+
+/* Persian/Farsi Font - Vazirmatn with CDN fallback */
 @font-face {
   font-family: 'Vazirmatn';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Vazirmatn Regular'), local('Vazirmatn-Regular');
+  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Regular.woff2') format('woff2'),
+       local('Vazirmatn Regular'), 
+       local('Vazirmatn-Regular'),
+       local('Vazir Regular'),
+       local('IRANSans');
+  unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
 }
 
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-Bold.woff2') format('woff2'),
+       local('Vazirmatn Bold'), 
+       local('Vazirmatn-Bold');
+  unicode-range: U+0600-06FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE80-FEFC;
+}
+
+/* Chinese Font - Noto Sans SC with fallbacks */
 @font-face {
   font-family: 'Noto Sans SC';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Noto Sans SC Regular'), local('NotoSansSC-Regular');
+  src: url('https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5JJXZ0pNWp-EYPbYP.woff2') format('woff2'),
+       local('Noto Sans SC Regular'), 
+       local('NotoSansSC-Regular'),
+       local('PingFang SC Regular'),
+       local('Hiragino Sans GB');
+  unicode-range: U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF, U+2A700-2B73F, U+2B740-2B81F, U+2B820-2CEAF;
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/notosanssc/v36/k3kCo84MPvpLmixcA63oeAL7Iqp5JJXZ0pMQqOEYPbYP.woff2') format('woff2'),
+       local('Noto Sans SC Bold'), 
+       local('NotoSansSC-Bold');
+  unicode-range: U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF, U+2A700-2B73F, U+2B740-2B81F, U+2B820-2CEAF;
 }
 
 /* Language indicator for screen readers */
@@ -397,4 +390,59 @@ html[lang="fr"] body,
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Font Loading Error Fallbacks */
+/* When fonts fail to load, ensure graceful degradation */
+.font-fallback-ar {
+  font-family: 'Traditional Arabic', 'Tahoma', 'Arial Unicode MS', sans-serif !important;
+  line-height: 1.8 !important;
+}
+
+.font-fallback-fa {
+  font-family: 'IRANSans', 'Tahoma', 'Arial Unicode MS', sans-serif !important;
+  line-height: 1.9 !important;
+}
+
+.font-fallback-zh {
+  font-family: 'Microsoft YaHei', 'SimHei', 'Arial Unicode MS', sans-serif !important;
+  line-height: 1.7 !important;
+}
+
+/* Font loading states */
+.fonts-loading .lang-ar,
+.fonts-loading .lang-fa,
+.fonts-loading .lang-zh {
+  visibility: hidden;
+}
+
+.fonts-loaded .lang-ar,
+.fonts-loaded .lang-fa,
+.fonts-loaded .lang-zh,
+.fonts-failed .lang-ar,
+.fonts-failed .lang-fa,
+.fonts-failed .lang-zh {
+  visibility: visible;
+}
+
+/* Apply fallback fonts when font loading fails */
+.fonts-failed .lang-ar {
+  font-family: 'Traditional Arabic', 'Tahoma', 'Arial Unicode MS', sans-serif;
+}
+
+.fonts-failed .lang-fa {
+  font-family: 'IRANSans', 'Tahoma', 'Arial Unicode MS', sans-serif;
+}
+
+.fonts-failed .lang-zh {
+  font-family: 'Microsoft YaHei', 'SimHei', 'Arial Unicode MS', sans-serif;
+}
+
+/* Prevent layout shift during font loading */
+.lang-ar,
+.lang-fa,
+.lang-zh {
+  font-synthesis: none;
+  -webkit-font-synthesis: none;
+  font-variant-ligatures: common-ligatures;
 }

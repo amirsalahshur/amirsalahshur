@@ -270,10 +270,91 @@ class LanguageSelector {
     }
 }
 
+// Add cleanup methods to LanguageSelector class
+LanguageSelector.prototype.revertLanguage = async function() {
+    try {
+        const previousLang = localStorage.getItem('portfolio_language_backup') || 'en';
+        await window.i18n.changeLanguage(previousLang);
+    } catch (error) {
+        console.error('Failed to revert language:', error);
+        this.useHardcodedFallbacks();
+    }
+};
+
+LanguageSelector.prototype.useHardcodedFallbacks = function() {
+    const hardcodedTranslations = {
+        'nav.home': 'Home',
+        'nav.work': 'Work',
+        'nav.about': 'About',
+        'nav.contact': 'Contact',
+        'language_selector.select_language': 'Select Language'
+    };
+    
+    Object.keys(hardcodedTranslations).forEach(key => {
+        const elements = document.querySelectorAll(`[data-i18n="${key}"]`);
+        elements.forEach(element => {
+            element.textContent = hardcodedTranslations[key];
+        });
+    });
+};
+
+LanguageSelector.prototype.destroy = function() {
+    this.destroyed = true;
+    
+    // Clear all timeouts
+    this.timeouts.forEach(timeoutId => {
+        clearTimeout(timeoutId);
+    });
+    this.timeouts.clear();
+    
+    // Remove all event listeners  
+    this.eventListeners.forEach((events, element) => {
+        events.forEach(eventType => {
+            const handler = this.boundHandlers.get(`${element.constructor.name}${eventType}`);
+            if (handler) {
+                element.removeEventListener(eventType, handler);
+            }
+        });
+    });
+    this.eventListeners.clear();
+    
+    // Clear bound handlers
+    this.boundHandlers.clear();
+    
+    // Disconnect observers
+    this.observers.forEach(observer => {
+        if (observer && typeof observer.disconnect === 'function') {
+            observer.disconnect();
+        }
+    });
+    this.observers.clear();
+};
+
+// Global instance for cleanup
+let languageSelectorInstance = null;
+
 // Initialize language selector when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Wait a bit for i18n to initialize
     setTimeout(() => {
-        new LanguageSelector();
+        if (!languageSelectorInstance) {
+            languageSelectorInstance = new LanguageSelector();
+        }
     }, 100);
+});
+
+// Cleanup on page unload to prevent memory leaks
+window.addEventListener('beforeunload', () => {
+    if (languageSelectorInstance && languageSelectorInstance.destroy) {
+        languageSelectorInstance.destroy();
+        languageSelectorInstance = null;
+    }
+});
+
+// Cleanup on page hide (for mobile devices)
+window.addEventListener('pagehide', () => {
+    if (languageSelectorInstance && languageSelectorInstance.destroy) {
+        languageSelectorInstance.destroy();
+        languageSelectorInstance = null;
+    }
 });

@@ -1,4 +1,4 @@
-// Internationalization (i18n) System for Portfolio Website
+// Enhanced Internationalization (i18n) System with Error Recovery
 class I18n {
     constructor() {
         this.currentLanguage = 'en';
@@ -6,6 +6,11 @@ class I18n {
         this.fallbackLanguage = 'en';
         this.storageKey = 'portfolio_language';
         this.rtlLanguages = ['ar', 'fa'];
+        this.cache = new Map();
+        this.retryAttempts = 3;
+        this.retryDelay = 1000;
+        this.isLoading = false;
+        this.loadPromise = null;
         
         this.init();
     }
@@ -31,22 +36,116 @@ class I18n {
     }
     
     async loadTranslations() {
+        // Prevent multiple simultaneous loads
+        if (this.isLoading) {
+            return this.loadPromise;
+        }
+        
+        // Check cache first
+        const cacheKey = this.currentLanguage;
+        if (this.cache.has(cacheKey)) {
+            this.translations = this.cache.get(cacheKey);
+            return;
+        }
+        
+        this.isLoading = true;
+        this.loadPromise = this.loadTranslationsWithRetry();
+        
         try {
-            const response = await fetch(`js/translations/${this.currentLanguage}.json`);
+            await this.loadPromise;
+        } finally {
+            this.isLoading = false;
+            this.loadPromise = null;
+        }
+    }
+    
+    async loadTranslationsWithRetry(attempt = 1) {
+        try {
+            const response = await fetch(`js/translations/${this.currentLanguage}.json`, {
+                cache: 'default',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: Failed to load ${this.currentLanguage} translations`);
+            }
+            
+            this.translations = await response.json();
+            
+            // Cache successful translations
+            this.cache.set(this.currentLanguage, this.translations);
+            
+            // Store backup language preference
+            localStorage.setItem('portfolio_language_backup', this.currentLanguage);
+            
+        } catch (error) {
+            console.warn(`Translation loading failed for ${this.currentLanguage} (attempt ${attempt}):`, error);
+            
+            if (attempt < this.retryAttempts) {
+                await this.delay(this.retryDelay * attempt);
+                return this.loadTranslationsWithRetry(attempt + 1);
+            }
+            
+            // Final attempt: try fallback language
+            if (this.currentLanguage !== this.fallbackLanguage) {
+                console.warn(`Falling back to ${this.fallbackLanguage}`);
+                await this.loadFallbackTranslations();
+            } else {
+                // Use hardcoded fallbacks as last resort
+                this.translations = this.getHardcodedFallbacks();
+            }
+        }
+    }
+    
+    async loadFallbackTranslations() {
+        try {
+            const response = await fetch(`js/translations/${this.fallbackLanguage}.json`);
             if (response.ok) {
                 this.translations = await response.json();
+                this.cache.set(this.fallbackLanguage, this.translations);
             } else {
-                console.warn(`Failed to load translations for ${this.currentLanguage}, falling back to ${this.fallbackLanguage}`);
-                if (this.currentLanguage !== this.fallbackLanguage) {
-                    const fallbackResponse = await fetch(`js/translations/${this.fallbackLanguage}.json`);
-                    if (fallbackResponse.ok) {
-                        this.translations = await fallbackResponse.json();
-                    }
-                }
+                this.translations = this.getHardcodedFallbacks();
             }
         } catch (error) {
-            console.error('Error loading translations:', error);
+            console.error('Fallback translation loading failed:', error);
+            this.translations = this.getHardcodedFallbacks();
         }
+    }
+    
+    getHardcodedFallbacks() {
+        return {
+            page_title_home: 'Amir Salahshur - Portfolio',
+            page_title_work: 'My Work - Amir Salahshur',
+            page_title_about: 'About Me - Amir Salahshur',
+            page_title_contact: 'Contact - Amir Salahshur',
+            meta_description: 'Passionate software developer crafting innovative solutions with modern technologies.',
+            nav: {
+                home: 'Home',
+                work: 'Work',
+                about: 'About',
+                contact: 'Contact'
+            },
+            hero: {
+                greeting: 'Hi, I\'m',
+                name: 'Amir Salahshur',
+                subtitle: 'Passionate software developer crafting innovative solutions with modern technologies.',
+                view_work: 'View My Work',
+                get_in_touch: 'Get In Touch'
+            },
+            footer: {
+                copyright: '© 2025 Amir Salahshur. All rights reserved.',
+                quote: '"Code is poetry written in logic"'
+            },
+            language_selector: {
+                select_language: 'Select Language'
+            }
+        };
+    }
+    
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
     
     translatePage() {
@@ -137,27 +236,56 @@ class I18n {
             return;
         }
         
+        const previousLanguage = this.currentLanguage;
         this.currentLanguage = languageCode;
         
-        // Save preference
-        localStorage.setItem(this.storageKey, languageCode);
-        
-        // Load new translations
-        await this.loadTranslations();
-        
-        // Apply translations
-        this.translatePage();
-        
-        // Update document direction
-        this.setDocumentDirection();
-        
-        // Update language selector
-        this.updateLanguageSelector();
-        
-        // Trigger custom event for other components
-        window.dispatchEvent(new CustomEvent('languageChanged', {
-            detail: { language: languageCode }
-        }));
+        try {
+            // Save preference
+            localStorage.setItem(this.storageKey, languageCode);
+            
+            // Load new translations with error handling
+            await this.loadTranslations();
+            
+            // Apply translations
+            this.translatePage();
+            
+            // Update document direction
+            this.setDocumentDirection();
+            
+            // Update language selector
+            this.updateLanguageSelector();
+            
+            // Trigger custom event for other components
+            window.dispatchEvent(new CustomEvent('languageChanged', {
+                detail: { 
+                    language: languageCode,
+                    previousLanguage: previousLanguage
+                }
+            }));
+            
+        } catch (error) {
+            console.error('Language change failed:', error);
+            
+            // Revert to previous language
+            this.currentLanguage = previousLanguage;
+            localStorage.setItem(this.storageKey, previousLanguage);
+            
+            // Attempt to reload previous translations
+            try {
+                await this.loadTranslations();
+                this.translatePage();
+                this.setDocumentDirection();
+                this.updateLanguageSelector();
+            } catch (revertError) {
+                console.error('Failed to revert language:', revertError);
+                // Use hardcoded fallbacks as last resort
+                this.translations = this.getHardcodedFallbacks();
+                this.translatePage();
+            }
+            
+            // Re-throw error for upstream handling
+            throw error;
+        }
     }
     
     setDocumentDirection() {
@@ -256,33 +384,50 @@ class I18n {
     
     optimizeTextRendering() {
         if (this.currentLanguage === 'ar' || this.currentLanguage === 'fa') {
-            // Enable advanced text features for better Arabic/Persian rendering
-            const elements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div');
-            elements.forEach(element => {
-                if (element.textContent.trim()) {
-                    element.style.fontFeatureSettings = "'liga' 1, 'calt' 1, 'kern' 1";
-                    element.style.textRendering = 'optimizeQuality';
-                    
-                    // Add subtle text shadow for better readability
-                    if (['H1', 'H2', 'H3'].includes(element.tagName)) {
-                        element.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.1)';
+            try {
+                // Enable advanced text features for better Arabic/Persian rendering
+                const elements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div');
+                elements.forEach(element => {
+                    try {
+                        if (element.textContent && element.textContent.trim()) {
+                            element.style.fontFeatureSettings = "'liga' 1, 'calt' 1, 'kern' 1";
+                            element.style.textRendering = 'optimizeQuality';
+                            
+                            // Add subtle text shadow for better readability
+                            if (['H1', 'H2', 'H3'].includes(element.tagName)) {
+                                element.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.1)';
+                            }
+                        }
+                    } catch (elementError) {
+                        console.warn('Failed to optimize text rendering for element:', elementError);
                     }
-                }
-            });
-            
-            // Handle number display in Arabic/Persian contexts
-            this.handleNumericContent();
+                });
+                
+                // Handle number display in Arabic/Persian contexts
+                this.handleNumericContent();
+                
+            } catch (error) {
+                console.error('Failed to optimize text rendering:', error);
+            }
         }
     }
     
     handleNumericContent() {
-        // Convert Western numerals to appropriate script if needed
-        const numericElements = document.querySelectorAll('.stat-number, .timeline-date, .skill-progress');
-        numericElements.forEach(element => {
-            // Keep Western numerals but ensure proper direction
-            element.style.direction = 'ltr';
-            element.style.unicodeBidi = 'embed';
-        });
+        try {
+            // Convert Western numerals to appropriate script if needed
+            const numericElements = document.querySelectorAll('.stat-number, .timeline-date, .skill-progress');
+            numericElements.forEach(element => {
+                try {
+                    // Keep Western numerals but ensure proper direction
+                    element.style.direction = 'ltr';
+                    element.style.unicodeBidi = 'embed';
+                } catch (elementError) {
+                    console.warn('Failed to handle numeric content for element:', elementError);
+                }
+            });
+        } catch (error) {
+            console.error('Failed to handle numeric content:', error);
+        }
     }
     
     getSupportedLanguages() {

@@ -1,23 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Amir Salahshur - Software Developer, Problem Solver, Tech Enthusiast">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Amir Salahshur - Software Developer, Problem Solver, Tech Enthusiast crafting innovative solutions with modern technologies">
+    <meta name="keywords" content="Amir Salahshur, Software Developer, Web Developer, JavaScript, TypeScript, React, Node.js, Portfolio">
+    <meta name="author" content="Amir Salahshur">
+    <meta name="robots" content="index, follow">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#6366f1" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#1e1b4b" media="(prefers-color-scheme: dark)">
+    
+    <!-- Enhanced SEO Meta Tags -->
+    <meta property="og:title" content="Amir Salahshur - Software Developer Portfolio">
+    <meta property="og:description" content="Passionate software developer crafting innovative solutions with modern technologies. Active in IT field and crypto space.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amirsalahshur.xyz">
+    <meta property="og:site_name" content="Amir Salahshur Portfolio">
+    <meta property="og:locale" content="en_US">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@salahshur_amir">
+    <meta name="twitter:creator" content="@salahshur_amir">
+    <meta name="twitter:title" content="Amir Salahshur - Software Developer">
+    <meta name="twitter:description" content="Passionate software developer crafting innovative solutions with modern technologies.">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; object-src 'none'; frame-src 'none';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
     <title>Amir Salahshur - Portfolio</title>
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="styles/variables.css" as="style">
-    <link rel="preload" href="styles/base.css" as="style">
+    <link rel="preload" href="styles/main.css" as="style">
+    <link rel="preload" href="js/performance.js" as="script">
+    <link rel="preload" href="js/theme-manager.js" as="script">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
+    <!-- Critical inline CSS to prevent FOUC -->
+    <style>
+        /* Prevent flash of unstyled content */
+        body:not(.loaded) {
+            visibility: hidden;
+        }
+        
+        /* Critical loading spinner */
+        .loading-spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #6366f1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 9999;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* Hide content until fonts load */
+        .fonts-loading * {
+            font-family: system-ui, -apple-system, sans-serif !important;
+        }
+        
+        /* Dark mode system preference */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --color-primary: #818cf8;
+                --color-text-primary: #f5f5f5;
+                --color-bg-primary: #171717;
+            }
+        }
+    </style>
+    
+    <!-- Font loading with fallbacks -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="styles/main.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Amir Salahshur",
+        "jobTitle": "Software Developer",
+        "description": "Passionate software developer crafting innovative solutions with modern technologies. Active in IT field and crypto space.",
+        "url": "https://amirsalahshur.xyz",
+        "sameAs": [
+            "https://github.com/amirsalahshur",
+            "https://twitter.com/salahshur_amir",
+            "https://t.me/Amir_salahshurr",
+            "https://discord.gg/dUf6A4cm"
+        ],
+        "knowsAbout": [
+            "JavaScript",
+            "TypeScript",
+            "React",
+            "Next.js",
+            "Node.js",
+            "Python",
+            "Software Development",
+            "Web Development"
+        ],
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Freelance"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "amirsalahshur2@gmail.com",
+            "contactType": "Professional"
+        }
+    }
+    </script>
     
     <!-- Performance and theme management -->
     <script src="js/performance.js" defer></script>
@@ -26,8 +134,11 @@
     <script src="js/language-selector.js" defer></script>
 </head>
 <body class="loading">
+    <!-- Loading spinner -->
+    <div class="loading-spinner" id="loading-spinner" aria-hidden="true"></div>
+    
     <!-- Skip to main content for accessibility -->
-    <a href="#main" class="skip-link">Skip to main content</a>
+    <a href="#main" class="skip-link" data-i18n="accessibility.skip_to_main">Skip to main content</a>
     
     <!-- Scroll progress bar -->
     <div class="scroll-progress"></div>
@@ -37,50 +148,53 @@
         <div class="spinner"></div>
         <div>Loading...</div>
     </div>
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="index.html">Amir Salahshur</a>
+                <a href="index.html" aria-label="Home - Amir Salahshur Portfolio">Amir Salahshur</a>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link active" data-i18n="nav.home">Home</a>
+            <ul class="nav-menu" role="menubar">
+                <li class="nav-item" role="none">
+                    <a href="index.html" class="nav-link active" role="menuitem" data-i18n="nav.home" aria-current="page">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="work.html" class="nav-link" data-i18n="nav.work">Work</a>
+                <li class="nav-item" role="none">
+                    <a href="work.html" class="nav-link" role="menuitem" data-i18n="nav.work">Work</a>
                 </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+                <li class="nav-item" role="none">
+                    <a href="about.html" class="nav-link" role="menuitem" data-i18n="nav.about">About</a>
                 </li>
-                <li class="nav-item">
-                    <a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
+                <li class="nav-item" role="none">
+                    <a href="contact.html" class="nav-link" role="menuitem" data-i18n="nav.contact">Contact</a>
                 </li>
             </ul>
-            <button class="hamburger" type="button" aria-expanded="false" data-i18n-aria-label="menu_toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <button class="hamburger" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation menu" data-i18n-aria-label="menu_toggle">
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
+                <span class="bar" aria-hidden="true"></span>
             </button>
         </div>
     </nav>
 
-    <main id="main">
-        <section id="home" class="hero scroll-animate">
+    <main id="main" role="main">
+        <section id="home" class="hero scroll-animate" aria-labelledby="hero-title">
             <div class="hero-container">
                 <div class="hero-content scroll-animate-left">
-                    <h1 class="hero-title animate-fade-in-up">
+                    <h1 id="hero-title" class="hero-title animate-fade-in-up">
                         <span data-i18n="hero.greeting">Hi, I'm</span> <span class="highlight text-gradient" data-i18n="hero.name">Amir Salahshur</span>
                     </h1>
                     <p class="hero-subtitle animate-fade-in-up animate-delay-200" data-i18n="hero.subtitle">
                         Passionate software developer crafting innovative solutions with modern technologies. 
                         Active in both IT field and crypto space.
                     </p>
-                    <div class="hero-cta animate-fade-in-up animate-delay-300">
-                        <a href="work.html" class="btn btn-primary" data-i18n="hero.view_work">View My Work</a>
-                        <a href="contact.html" class="btn btn-secondary" data-i18n="hero.get_in_touch">Get In Touch</a>
+                    <div class="hero-cta animate-fade-in-up animate-delay-300" role="group" aria-label="Call to action buttons">
+                        <a href="work.html" class="btn btn-primary" data-i18n="hero.view_work" aria-describedby="work-description">View My Work</a>
+                        <a href="contact.html" class="btn btn-secondary" data-i18n="hero.get_in_touch" aria-describedby="contact-description">Get In Touch</a>
                     </div>
+                    <!-- Hidden descriptions for screen readers -->
+                    <div id="work-description" class="sr-only">View my portfolio of development projects and case studies</div>
+                    <div id="contact-description" class="sr-only">Get in touch to discuss potential collaborations or projects</div>
                 </div>
-                <div class="hero-image scroll-animate-right">
+                <div class="hero-image scroll-animate-right" role="img" aria-label="Profile avatar">
                     <div class="hero-avatar animate-float">
                         <div class="avatar-placeholder">AS</div>
                     </div>
@@ -90,7 +204,7 @@
 
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <p data-i18n="footer.copyright">&copy; 2025 Amir Salahshur. All rights reserved.</p>
             <p class="footer-quote" data-i18n="footer.quote">"Code is poetry written in logic"</p>
@@ -99,18 +213,77 @@
 
     <script src="js/main.js"></script>
     
-    <!-- Initialize performance optimizations -->
+    <!-- Enhanced initialization with performance monitoring -->
     <script>
-        // Mark page as loaded
-        window.addEventListener('load', () => {
-            document.body.classList.remove('loading');
-            document.body.classList.add('loaded');
+        // Performance monitoring
+        const performanceMetrics = {
+            navigationStart: performance.timing.navigationStart,
+            domContentLoaded: 0,
+            fullyLoaded: 0
+        };
+        
+        // Track DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            performanceMetrics.domContentLoaded = Date.now() - performanceMetrics.navigationStart;
         });
         
-        // Initialize theme-aware content
-        if (typeof themeManager !== 'undefined') {
-            themeManager.initThemeAwareContent();
-            themeManager.loadThemeAwareImages();
+        // Mark page as loaded with performance tracking
+        window.addEventListener('load', () => {
+            performanceMetrics.fullyLoaded = Date.now() - performanceMetrics.navigationStart;
+            
+            // Hide loading spinner
+            const spinner = document.getElementById('loading-spinner');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+            
+            // Mark body as loaded
+            document.body.classList.remove('loading', 'fonts-loading');
+            document.body.classList.add('loaded', 'fonts-loaded');
+            
+            // Initialize theme-aware content
+            if (typeof themeManager !== 'undefined') {
+                themeManager.initThemeAwareContent();
+                themeManager.loadThemeAwareImages();
+            }
+            
+            // Set viewport height for mobile
+            const setVH = () => {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            };
+            setVH();
+            window.addEventListener('resize', setVH);
+            window.addEventListener('orientationchange', setVH);
+            
+            // Log performance metrics (development only)
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log('Performance Metrics:', {
+                    'DOM Content Loaded': performanceMetrics.domContentLoaded + 'ms',
+                    'Fully Loaded': performanceMetrics.fullyLoaded + 'ms',
+                    'First Contentful Paint': performance.getEntriesByName('first-contentful-paint')[0]?.startTime || 'N/A'
+                });
+            }
+        });
+        
+        // Font loading detection
+        if ('fonts' in document) {
+            document.fonts.ready.then(() => {
+                document.body.classList.add('fonts-loaded');
+                document.body.classList.remove('fonts-loading');
+            }).catch(() => {
+                document.body.classList.add('fonts-failed');
+                document.body.classList.remove('fonts-loading');
+            });
+        }
+        
+        // Service worker registration (if available)
+        if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(() => {
+                    // Service worker registration failed - silently continue
+                });
+            });
         }
     </script>
 </body>
