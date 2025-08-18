@@ -51,6 +51,8 @@
     "project_type": "Type de projet",
     "project_type_placeholder": "Sélectionner le type de projet",
     "send_message": "Envoyer le message",
+    "form_note_title": "Note :",
+    "form_note_text": "Ce formulaire ouvrira votre client de messagerie par défaut. Vous pouvez également m’envoyer un e-mail directement à l’une des adresses mentionnées ci-dessus.",
     "project_types": {
       "web": "Développement web",
       "mobile": "Application mobile",
@@ -70,5 +72,7 @@
   },
   
   "loading": "Chargement...",
-  "menu_toggle": "Basculer le menu"
+  "menu_toggle": "Basculer le menu",
+  "close_menu": "Fermer le menu",
+  "open_menu": "Ouvrir le menu"
 }

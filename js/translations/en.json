@@ -51,6 +51,8 @@
     "project_type": "Project Type",
     "project_type_placeholder": "Select project type",
     "send_message": "Send Message",
+    "form_note_title": "Note:",
+    "form_note_text": "This form will open your default email client. You can also email me directly at any of the addresses listed above.",
     "project_types": {
       "web": "Web Development",
       "mobile": "Mobile App",
@@ -70,5 +72,7 @@
   },
   
   "loading": "Loading...",
-  "menu_toggle": "Toggle menu"
+  "menu_toggle": "Toggle menu",
+  "close_menu": "Close menu",
+  "open_menu": "Open menu"
 }

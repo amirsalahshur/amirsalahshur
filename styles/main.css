@@ -384,13 +384,32 @@ html {
     transform: translateY(-8px) scale(1.02) rotateY(-2deg);
 }
 
+[dir="rtl"] .btn-secondary::after {
+    right: 0;
+    left: auto;
+}
+
 [dir="rtl"] .btn-secondary:hover::after {
     animation: rtlSlideIn 0.3s ease forwards;
 }
 
 @keyframes rtlSlideIn {
-    0% { width: 0; }
-    100% { width: 100%; }
+    0% { width: 0; right: 0; }
+    100% { width: 100%; right: 0; }
+}
+
+/* RTL button improvements */
+[dir="rtl"] .btn {
+    direction: rtl;
+    text-align: center;
+}
+
+[dir="rtl"] .hero-cta {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .cta-buttons {
+    flex-direction: row-reverse;
 }
 
 /* Improved mobile responsiveness for language selector */
@@ -2808,6 +2827,8 @@ section {
 /* Micro-interactions for buttons */
 .btn {
     position: relative;
+    overflow: hidden;
+    isolation: isolate;
 }
 
 .btn::after {
@@ -2821,12 +2842,38 @@ section {
     background: rgba(255, 255, 255, 0.5);
     transform: translate(-50%, -50%);
     transition: width 0.3s ease, height 0.3s ease;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .btn:active::after {
     width: 300px;
     height: 300px;
     transition: width 0s, height 0s;
+}
+
+/* Enhanced language-specific button styles */
+[lang="ar"] .btn,
+[lang="fa"] .btn {
+    font-family: 'Noto Sans Arabic', 'Vazir', 'Tahoma', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+    padding: 14px 28px;
+}
+
+[lang="zh"] .btn {
+    font-family: 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    padding: 13px 26px;
+}
+
+[lang="ru"] .btn,
+[lang="de"] .btn,
+[lang="fr"] .btn {
+    font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 /* Enhanced focus indicators */

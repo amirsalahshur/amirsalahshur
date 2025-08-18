@@ -11,6 +11,11 @@ class LanguageSelector {
     }
     
     createLanguageSelector() {
+        // Check if language selector already exists
+        if (document.querySelector('.language-selector')) {
+            return;
+        }
+        
         // Create language selector container
         const selector = document.createElement('div');
         selector.className = 'language-selector';

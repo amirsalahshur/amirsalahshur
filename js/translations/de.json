@@ -51,6 +51,8 @@
     "project_type": "Projekttyp",
     "project_type_placeholder": "Projekttyp auswählen",
     "send_message": "Nachricht senden",
+    "form_note_title": "Hinweis:",
+    "form_note_text": "Dieses Formular öffnet Ihr Standard-E-Mail-Programm. Sie können mir auch direkt an eine der oben genannten Adressen schreiben.",
     "project_types": {
       "web": "Web-Entwicklung",
       "mobile": "Mobile App",
@@ -70,5 +72,7 @@
   },
   
   "loading": "Wird geladen...",
-  "menu_toggle": "Menü umschalten"
+  "menu_toggle": "Menü umschalten",
+  "close_menu": "Menü schließen",
+  "open_menu": "Menü öffnen"
 }

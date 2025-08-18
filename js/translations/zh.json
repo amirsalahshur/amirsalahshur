@@ -51,6 +51,8 @@
     "project_type": "项目类型",
     "project_type_placeholder": "选择项目类型",
     "send_message": "发送消息",
+    "form_note_title": "注意：",
+    "form_note_text": "此表单将打开您的默认邮件客户端。您也可以直接发送邮件到上面列出的任一地址。",
     "project_types": {
       "web": "网站开发",
       "mobile": "移动应用",
@@ -70,5 +72,7 @@
   },
   
   "loading": "加载中...",
-  "menu_toggle": "切换菜单"
+  "menu_toggle": "切换菜单",
+  "close_menu": "关闭菜单",
+  "open_menu": "打开菜单"
 }

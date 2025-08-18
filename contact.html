@@ -32,51 +32,11 @@
                     <a href="contact.html" class="nav-link active" data-i18n="nav.contact">Contact</a>
                 </li>
             </ul>
-            <div class="hamburger" data-i18n-aria-label="menu_toggle">
+            <button class="hamburger" type="button" aria-expanded="false" data-i18n-aria-label="menu_toggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
-            <div class="language-selector">
-                <button class="language-selector-button" aria-label="Language selector" aria-expanded="false">
-                    <span class="current-language-flag">🇺🇸</span>
-                    <span class="current-language-name">English</span>
-                    <span class="language-arrow">▼</span>
-                </button>
-                <div class="language-dropdown">
-                    <div class="language-dropdown-header">Choose Language</div>
-                    <div class="language-options">
-                        <button class="language-option" data-lang="en" data-selected="true">
-                            <span class="language-flag">🇺🇸</span>
-                            <span class="language-name">English</span>
-                        </button>
-                        <button class="language-option" data-lang="ar">
-                            <span class="language-flag">🇸🇦</span>
-                            <span class="language-name">العربية</span>
-                        </button>
-                        <button class="language-option" data-lang="fa">
-                            <span class="language-flag">🇮🇷</span>
-                            <span class="language-name">فارسی</span>
-                        </button>
-                        <button class="language-option" data-lang="fr">
-                            <span class="language-flag">🇫🇷</span>
-                            <span class="language-name">Français</span>
-                        </button>
-                        <button class="language-option" data-lang="de">
-                            <span class="language-flag">🇩🇪</span>
-                            <span class="language-name">Deutsch</span>
-                        </button>
-                        <button class="language-option" data-lang="ru">
-                            <span class="language-flag">🇷🇺</span>
-                            <span class="language-name">Русский</span>
-                        </button>
-                        <button class="language-option" data-lang="zh">
-                            <span class="language-flag">🇨🇳</span>
-                            <span class="language-name">中文</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -190,13 +150,13 @@
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary form-submit" data-i18n="contact.send_message">
+                                <button type="submit" class="btn btn-primary form-submit" data-i18n="contact.send_message" aria-describedby="form-note">
                                     Send Message
                                 </button>
                             </form>
 
-                            <div class="form-note">
-                                <p><strong>Note:</strong> This form will open your default email client. You can also email me directly at any of the addresses listed above.</p>
+                            <div class="form-note" id="form-note">
+                                <p><strong data-i18n="contact.form_note_title">Note:</strong> <span data-i18n="contact.form_note_text">This form will open your default email client. You can also email me directly at any of the addresses listed above.</span></p>
                             </div>
                         </div>
                     </div>

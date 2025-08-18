@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Test - All Languages</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="js/i18n.js" defer></script>
+    <script src="js/language-selector.js" defer></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Amir Salahshur</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="work.html" class="nav-link" data-i18n="nav.work">Work</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link" data-i18n="nav.about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a>
+                </li>
+            </ul>
+            <button class="hamburger" type="button" aria-expanded="false" data-i18n-aria-label="menu_toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Button Functionality Test</h1>
+                <p>Test all buttons in different languages to ensure they work correctly.</p>
+                
+                <div class="hero-cta" style="margin: 2rem 0;">
+                    <a href="work.html" class="btn btn-primary" data-i18n="hero.view_work">View My Work</a>
+                    <a href="contact.html" class="btn btn-secondary" data-i18n="hero.get_in_touch">Get In Touch</a>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h2>Language Selector Test</h2>
+                    <p>Click the language selector to test different languages:</p>
+                    <ul>
+                        <li>English (EN) 🇺🇸</li>
+                        <li>العربية (AR) 🇸🇦</li>
+                        <li>فارسی (FA) 🇮🇷</li>
+                        <li>Français (FR) 🇫🇷</li>
+                        <li>Deutsch (DE) 🇩🇪</li>
+                        <li>Русский (RU) 🇷🇺</li>
+                        <li>中文 (ZH) 🇨🇳</li>
+                    </ul>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h2>Mobile Menu Test</h2>
+                    <p>Test the hamburger menu on mobile devices or by resizing your browser window.</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h2>Contact Form Button Test</h2>
+                    <p>Go to the <a href="contact.html" class="btn btn-primary" style="font-size: 0.9rem; padding: 0.5rem 1rem;">Contact Page</a> to test the form submission button.</p>
+                </div>
+
+                <div style="margin: 2rem 0;">
+                    <h2>Test Results</h2>
+                    <p>✅ Language selector should work in all languages</p>
+                    <p>✅ Hamburger menu should open/close properly</p>
+                    <p>✅ All buttons should be properly accessible with keyboard navigation</p>
+                    <p>✅ RTL languages (Arabic, Persian) should display buttons correctly</p>
+                    <p>✅ Button hover and active states should work</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p data-i18n="footer.copyright">&copy; 2025 Amir Salahshur. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

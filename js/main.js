@@ -32,8 +32,7 @@ if (hamburger && navMenu) {
         
         // Accessibility: Update aria attributes
         const isExpanded = hamburger.classList.contains('active');
-        hamburger.setAttribute('aria-expanded', isExpanded);
-        hamburger.setAttribute('aria-label', isExpanded ? 'Close menu' : 'Open menu');
+        hamburger.setAttribute('aria-expanded', isExpanded.toString());
     });
     
     // Close menu on escape key
