@@ -182,20 +182,44 @@ html[lang="zh"] h1, html[lang="zh"] h2, html[lang="zh"] h3, html[lang="zh"] h4, 
   unicode-bidi: embed;
 }
 
-/* Language-specific text sizes for better readability */
+/* Enhanced language-specific text sizes with fluid typography */
 .lang-ar .hero-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.2;
+  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+  line-height: clamp(1.1, 1vw + 1rem, 1.3);
+  letter-spacing: 0.02em;
 }
 
 .lang-fa .hero-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  line-height: 1.3;
+  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+  line-height: clamp(1.2, 1vw + 1rem, 1.4);
+  letter-spacing: 0.03em;
 }
 
 .lang-zh .hero-title {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  line-height: 1.3;
+  font-size: clamp(1.8rem, 4vw + 0.8rem, 3.2rem);
+  line-height: clamp(1.2, 1vw + 1rem, 1.4);
+  letter-spacing: 0.05em;
+}
+
+.lang-ru .hero-title {
+  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+  line-height: clamp(1.1, 1vw + 1rem, 1.3);
+}
+
+/* Responsive typography for all text elements */
+.lang-ar p, .lang-fa p {
+  font-size: clamp(0.9rem, 2vw + 0.5rem, 1.1rem);
+  line-height: var(--arabic-line-height);
+}
+
+.lang-zh p {
+  font-size: clamp(0.85rem, 2vw + 0.4rem, 1.05rem);
+  line-height: var(--chinese-line-height);
+  letter-spacing: 0.02em;
+}
+
+.lang-ru p {
+  font-size: clamp(0.9rem, 2vw + 0.5rem, 1rem);
 }
 
 /* RTL-specific border radius adjustments */
@@ -252,33 +276,99 @@ html[lang="zh"] h1, html[lang="zh"] h2, html[lang="zh"] h3, html[lang="zh"] h4, 
 .lang-zh q::before { content: """; }
 .lang-zh q::after { content: """; }
 
-/* Loading and transition states for language switching */
+/* Enhanced loading and transition states for language switching */
 .language-switching {
   opacity: 0.7;
   pointer-events: none;
   transition: opacity var(--transition-smooth);
+  position: relative;
 }
 
+.language-switching::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--color-primary-rgb, 99, 102, 241), 0.2),
+    transparent
+  );
+  animation: languageShimmer 1.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes languageShimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Improved transition animations */
 .language-switch-fade-enter {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(15px) scale(0.95);
 }
 
 .language-switch-fade-enter-active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
   transition: all var(--transition-smooth);
 }
 
 .language-switch-fade-exit {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .language-switch-fade-exit-active {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-15px) scale(0.95);
   transition: all var(--transition-smooth);
+}
+
+/* RTL-specific transitions */
+[dir="rtl"] .language-switch-fade-enter {
+  transform: translateX(15px) scale(0.95);
+}
+
+[dir="rtl"] .language-switch-fade-enter-active {
+  transform: translateX(0) scale(1);
+}
+
+[dir="rtl"] .language-switch-fade-exit-active {
+  transform: translateX(-15px) scale(0.95);
+}
+
+/* Language change success indicator */
+.language-change-success {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: var(--color-primary);
+  color: white;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  transform: translateX(100%);
+  transition: transform var(--transition-smooth);
+  z-index: var(--z-tooltip);
+}
+
+.language-change-success.show {
+  transform: translateX(0);
+}
+
+[dir="rtl"] .language-change-success {
+  right: auto;
+  left: 20px;
+  transform: translateX(-100%);
+}
+
+[dir="rtl"] .language-change-success.show {
+  transform: translateX(0);
 }
 
 /* Print styles for multilingual content */
@@ -438,11 +528,97 @@ html[lang="zh"] h1, html[lang="zh"] h2, html[lang="zh"] h3, html[lang="zh"] h4, 
   font-family: 'Microsoft YaHei', 'SimHei', 'Arial Unicode MS', sans-serif;
 }
 
-/* Prevent layout shift during font loading */
+/* Enhanced font loading and layout shift prevention */
 .lang-ar,
 .lang-fa,
 .lang-zh {
   font-synthesis: none;
   -webkit-font-synthesis: none;
   font-variant-ligatures: common-ligatures;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Size-adjust for better font metric consistency */
+@supports (size-adjust: 100%) {
+  .lang-ar {
+    size-adjust: 105%;
+  }
+  
+  .lang-fa {
+    size-adjust: 105%;
+  }
+  
+  .lang-zh {
+    size-adjust: 95%;
+  }
+}
+
+/* Modern CSS features for better multilingual support */
+@supports (font-variant-position: normal) {
+  .lang-ar,
+  .lang-fa {
+    font-variant-position: normal;
+  }
+}
+
+/* Container queries for responsive language components */
+@supports (container-type: inline-size) {
+  .language-content {
+    container-type: inline-size;
+  }
+  
+  @container (max-width: 400px) {
+    .lang-ar .hero-title,
+    .lang-fa .hero-title {
+      font-size: clamp(1.5rem, 8vw, 2.5rem);
+    }
+  }
+  
+  @container (max-width: 300px) {
+    .lang-zh .hero-title {
+      font-size: clamp(1.3rem, 7vw, 2.2rem);
+      letter-spacing: 0.03em;
+    }
+  }
+}
+
+/* Logical properties for better RTL support */
+@supports (margin-inline-start: 0) {
+  [dir="rtl"] .nav-language-selector {
+    margin-inline-start: 0;
+    margin-inline-end: var(--space-4);
+  }
+  
+  [dir="rtl"] .language-dropdown {
+    inset-inline-end: 0;
+    inset-inline-start: auto;
+  }
+}
+
+/* Cascade layers for better CSS organization */
+@supports (layer: base) {
+  @layer language-base, language-components, language-utilities;
+  
+  @layer language-base {
+    .lang-ar, .lang-fa {
+      direction: rtl;
+      text-align: right;
+    }
+  }
+  
+  @layer language-components {
+    .language-selector {
+      position: relative;
+    }
+  }
+  
+  @layer language-utilities {
+    .sr-only-rtl {
+      direction: rtl;
+      text-align: right;
+    }
+  }
 }

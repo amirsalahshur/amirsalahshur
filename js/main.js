@@ -11,8 +11,55 @@ class NavigationManager {
         this.boundHandlers = new Map();
         this.destroyed = false;
         this.ticking = false;
+        this.dependencies = new Set();
         
-        this.init();
+        // Initialize with dependency checking
+        this.initWithDependencies();
+    }
+    
+    async initWithDependencies() {
+        try {
+            // Wait for critical dependencies
+            await this.waitForDependencies();
+            
+            // Initialize main functionality
+            this.init();
+            
+        } catch (error) {
+            console.error('NavigationManager initialization failed:', error);
+            
+            // Fallback initialization
+            this.initFallback();
+        }
+    }
+    
+    async waitForDependencies() {
+        const dependencies = [
+            () => document.readyState === 'interactive' || document.readyState === 'complete',
+            () => window.i18n !== undefined,
+            () => document.querySelector('.navbar') !== null
+        ];
+        
+        const maxWait = 5000; // 5 seconds
+        const startTime = Date.now();
+        
+        while (Date.now() - startTime < maxWait) {
+            if (dependencies.every(dep => dep())) {
+                return;
+            }
+            await new Promise(resolve => setTimeout(resolve, 50));
+        }
+        
+        console.warn('Some dependencies not met, proceeding with initialization');
+    }
+    
+    initFallback() {
+        // Minimal initialization for when dependencies fail
+        console.log('Using fallback navigation initialization');
+        
+        // Only initialize critical navigation
+        this.initializeNavigation();
+        this.initializeScrollHandling();
     }
     
     init() {
@@ -671,21 +718,184 @@ ${name}`;
     }
 }
 
-// Main initialization
-document.addEventListener('DOMContentLoaded', () => {
-    const navigationManager = new NavigationManager();
-
-    window.addEventListener('beforeunload', () => {
-        if (navigationManager) {
-            navigationManager.destroy();
-            navigationManager = null;
+// Enhanced initialization with error handling and performance monitoring
+class ApplicationManager {
+    constructor() {
+        this.components = new Map();
+        this.initializationStart = performance.now();
+        this.criticalPath = true;
+        
+        this.init();
+    }
+    
+    async init() {
+        try {
+            // Initialize critical components first
+            await this.initializeCriticalComponents();
+            
+            // Initialize non-critical components with delay
+            setTimeout(() => {
+                this.initializeNonCriticalComponents();
+            }, 100);
+            
+            // Setup cleanup handlers
+            this.setupCleanupHandlers();
+            
+            // Log performance metrics
+            this.logPerformanceMetrics();
+            
+        } catch (error) {
+            console.error('Application initialization failed:', error);
+            this.handleInitializationFailure(error);
         }
-    });
-
-    window.addEventListener('pagehide', () => {
-        if (navigationManager) {
-            navigationManager.destroy();
-            navigationManager = null;
+    }
+    
+    async initializeCriticalComponents() {
+        // Navigation is critical for user interaction
+        try {
+            const navigationManager = new NavigationManager();
+            this.components.set('navigation', navigationManager);
+        } catch (error) {
+            console.error('Critical component (navigation) failed:', error);
+            throw error;
         }
+    }
+    
+    initializeNonCriticalComponents() {
+        // Initialize other components that don't block initial render
+        const nonCriticalComponents = [
+            { name: 'animations', init: () => this.initializeAnimations() },
+            { name: 'lazyLoading', init: () => this.initializeLazyLoading() },
+            { name: 'serviceWorker', init: () => this.initializeServiceWorker() }
+        ];
+        
+        nonCriticalComponents.forEach(({ name, init }) => {
+            try {
+                init();
+            } catch (error) {
+                console.warn(`Non-critical component (${name}) failed:`, error);
+            }
+        });
+    }
+    
+    initializeAnimations() {
+        // Only initialize animations if user prefers them
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            // Initialize scroll animations, etc.
+            this.components.set('animations', true);
+        }
+    }
+    
+    initializeLazyLoading() {
+        // Initialize lazy loading for images and other resources
+        if ('IntersectionObserver' in window) {
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            if (lazyImages.length > 0) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(img => imageObserver.observe(img));
+                this.components.set('lazyLoading', imageObserver);
+            }
+        }
+    }
+    
+    initializeServiceWorker() {
+        // Register service worker if supported and in production
+        if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    this.components.set('serviceWorker', registration);
+                })
+                .catch(error => {
+                    console.warn('Service worker registration failed:', error);
+                });
+        }
+    }
+    
+    setupCleanupHandlers() {
+        const cleanup = () => {
+            this.components.forEach((component, name) => {
+                try {
+                    if (component && typeof component.destroy === 'function') {
+                        component.destroy();
+                    } else if (component && typeof component.disconnect === 'function') {
+                        component.disconnect();
+                    }
+                } catch (error) {
+                    console.warn(`Cleanup failed for ${name}:`, error);
+                }
+            });
+            this.components.clear();
+        };
+        
+        window.addEventListener('beforeunload', cleanup, { once: true });
+        window.addEventListener('pagehide', cleanup, { once: true });
+        
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // Pause non-essential components when page is hidden
+                this.pauseNonEssentialComponents();
+            } else {
+                // Resume components when page becomes visible
+                this.resumeComponents();
+            }
+        });
+    }
+    
+    pauseNonEssentialComponents() {
+        // Pause animations, timers, etc. to save resources
+        const navigation = this.components.get('navigation');
+        if (navigation && navigation.isOpen) {
+            navigation.closeMobileMenu();
+        }
+    }
+    
+    resumeComponents() {
+        // Resume paused components if needed
+        // Currently no action needed, but can be extended
+    }
+    
+    handleInitializationFailure(error) {
+        // Graceful degradation when initialization fails
+        console.error('Application failed to initialize properly:', error);
+        
+        // Show user-friendly error message
+        const errorElement = document.createElement('div');
+        errorElement.className = 'init-error';
+        errorElement.innerHTML = `
+            <p>Some features may not work properly. Please refresh the page.</p>
+            <button onclick="window.location.reload()">Refresh Page</button>
+        `;
+        
+        document.body.appendChild(errorElement);
+    }
+    
+    logPerformanceMetrics() {
+        const initTime = performance.now() - this.initializationStart;
+        
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            console.log(`Application initialized in ${initTime.toFixed(2)}ms`);
+            console.log('Initialized components:', Array.from(this.components.keys()));
+        }
+    }
+}
+
+// Initialize application when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new ApplicationManager();
     });
-});
+} else {
+    // DOM is already ready
+    new ApplicationManager();
+}

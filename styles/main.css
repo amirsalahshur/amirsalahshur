@@ -1,27 +1,28 @@
 /* 
- * Portfolio Website - Modular CSS Architecture
+ * Portfolio Website - Optimized CSS Architecture
  * Amir Salahshur - Performance-First Design System
  * 
- * Modular CSS structure for better maintainability
- * Import order optimized for cascade and performance
+ * Streamlined CSS structure with critical path optimization
+ * Imports ordered by render-blocking priority
  */
 
-/* === FOUNDATION LAYERS === */
+/* === CRITICAL FOUNDATION (Above-the-fold) === */
 @import 'variables.css';
 @import 'base.css';
 
-/* === LAYOUT SYSTEM === */
+/* === CRITICAL LAYOUT (Hero & Navigation) === */
 @import 'layout/grid.css';
-
-/* === COMPONENT LIBRARY === */
 @import 'components/navigation.css';
-@import 'components/buttons.css';
-@import 'components/forms.css';
-@import 'components/cards.css';
 
-/* === UTILITIES === */
-@import 'utilities.css';
-@import 'animations.css';
+/* === NON-CRITICAL COMPONENTS (Deferred) === */
+@import 'components/buttons.css' (prefers-reduced-motion: no-preference);
+@import 'components/forms.css' layer(components);
+@import 'components/cards.css' layer(components);
+
+/* === PROGRESSIVE ENHANCEMENTS === */
+@import 'language.css' supports(container-type: inline-size);
+@import 'utilities.css' layer(utilities);
+@import 'animations.css' (prefers-reduced-motion: no-preference);
 
 /* === PAGE-SPECIFIC STYLES === */
 
@@ -375,37 +376,34 @@
   opacity: 0.8;
 }
 
-/* Page Transition Overlay */
-.page-transition {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--color-bg-primary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition-smooth);
-}
-
-.page-transition.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.page-transition .spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--color-border-light);
-  border-top: 3px solid var(--color-primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: var(--space-4);
+/* === STREAMLINED TRANSITIONS === */
+/* Simplified transition overlay */
+@layer transitions {
+  .page-transition {
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg-primary);
+    display: grid;
+    place-items: center;
+    z-index: var(--z-modal);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-smooth);
+  }
+  
+  .page-transition.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .page-transition .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid transparent;
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
 }
 
 /* Form Note */
@@ -424,21 +422,8 @@
   line-height: var(--line-height-relaxed);
 }
 
-/* === CSS DESIGN SYSTEM VARIABLES === */
-:root {
-  /* Enhanced Color System */
-  /* Primary Colors - Modern Blue/Indigo Scale */
-  --primary-50: #f0f5ff;
-  --primary-100: #e0ecff;
-  --primary-200: #c7ddff;
-  --primary-300: #a5c8ff;
-  --primary-400: #7ea6ff;
-  --primary-500: #6366f1;
-  --primary-600: #4f46e5;
-  --primary-700: #4338ca;
-  --primary-800: #3730a3;
-  --primary-900: #312e81;
-  --primary-950: #1e1b4b;
+/* Remove duplicate CSS variables - they're in variables.css */
+/* This section is now handled by the variables.css import */
   
   /* Neutral Colors - Sophisticated Gray Scale */
   --neutral-0: #ffffff;
@@ -1324,43 +1309,25 @@ main {
   opacity: 0.8;
 }
 
-/* Critical navigation styles */
+/* Remove duplicate navigation styles - they're in components/navigation.css */
+/* This section is now handled by the navigation.css import */
 
-/* Critical navigation styles */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1020;
-  height: 80px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-}
+/* === CRITICAL ABOVE-THE-FOLD STYLES === */
+/* Only include styles needed for initial render */
 
-.nav-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* Critical hero section styles */
 .hero {
   display: flex;
   align-items: center;
-  min-height: calc(100vh - 80px);
-  padding: 2rem 0;
+  min-height: max(calc(100vh - 80px), 500px);
+  padding: clamp(1rem, 4vw, 3rem) 0;
 }
 
 main {
   min-height: calc(100vh - 80px);
+  padding-top: 80px;
 }
 
-/* Loading state styles */
+/* Critical loading states */
 .loading {
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1370,10 +1337,17 @@ main {
   opacity: 1;
 }
 
-/* Performance optimizations */
-.gpu-accelerated {
-  transform: translateZ(0);
-  will-change: transform;
+/* Performance layer */
+@layer performance {
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  .critical-resource {
+    content-visibility: auto;
+    contain-intrinsic-size: 200px;
+  }
 }
 
 /* Font loading optimization */
@@ -1525,77 +1499,8 @@ main {
   }
 }
 
-/* === MOBILE NAVIGATION STYLES === */
-@media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-  }
-  
-  .nav-menu {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    background: var(--color-bg-primary);
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    padding: var(--space-4) 0;
-    transform: translateY(-100vh);
-    opacity: 0;
-    visibility: hidden;
-    transition: all var(--transition-smooth);
-    max-height: calc(100vh - 80px);
-    max-height: calc(100dvh - 80px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .nav-menu.active {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .nav-link {
-    padding: var(--space-4) var(--space-6);
-    font-size: var(--font-size-lg);
-    border-radius: 0;
-    min-height: 44px;
-  }
-  
-  .nav-link::after {
-    display: none;
-  }
-  
-  .nav-link.active {
-    background-color: var(--color-primary-light);
-    border-left: 4px solid var(--color-primary);
-  }
-  
-  .hero {
-    min-height: calc(100vh - 80px);
-    min-height: calc(100dvh - 80px);
-  }
-  
-  .hero-content {
-    text-align: center;
-  }
-  
-  .hero-cta {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-/* Body scroll lock when mobile menu is open */
-body.menu-open {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
-}
+/* Mobile styles are now in components/navigation.css */
+/* Reduced duplication for better maintainability */
 
 /* === VIEWPORT AND MOBILE OPTIMIZATIONS === */
 /* Dynamic viewport height support */

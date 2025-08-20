@@ -32,7 +32,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 4.5rem;
+  height: 72px;
+  position: relative;
 }
 
 /* ===== LOGO ===== */
@@ -154,26 +155,33 @@
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
+    order: 2;
   }
 
   .nav-menu {
     position: fixed;
-    top: 0;
+    top: 72px;
     left: 0;
     right: 0;
     bottom: 0;
     background-color: var(--color-bg-primary);
+    border-top: 1px solid var(--color-border-light);
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-6);
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: var(--space-4) 0;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-100%);
     transition: all var(--transition-smooth);
     z-index: calc(var(--z-fixed) - 1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    max-height: calc(100vh - 72px);
+    max-height: calc(100dvh - 72px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-menu.active {
@@ -182,21 +190,50 @@
     transform: translateY(0);
   }
 
+  .nav-item {
+    width: 100%;
+  }
+
   .nav-link {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-lg);
     padding: var(--space-4) var(--space-6);
-    border-radius: var(--radius-lg);
+    border-radius: 0;
+    border-bottom: 1px solid var(--color-border-light);
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
   }
 
   .nav-link::after {
     display: none;
   }
 
+  .nav-link.active {
+    background-color: var(--color-primary-light);
+    border-left: 4px solid var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* RTL support for mobile */
+  [dir="rtl"] .nav-link.active {
+    border-left: none;
+    border-right: 4px solid var(--color-primary);
+  }
+
   /* Body scroll lock when menu is open */
   body.menu-open,
   body.nav-open {
     overflow: hidden;
+    position: fixed;
+    width: 100%;
     height: 100vh;
+    height: 100dvh;
   }
 }
 
@@ -368,7 +405,7 @@
   flex-direction: row-reverse;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* ===== IMPROVED RESPONSIVE DESIGN ===== */
 @media (max-width: 640px) {
   .nav-container {
     padding: 0 var(--space-4);
@@ -377,24 +414,93 @@
   .nav-logo a {
     font-size: var(--font-size-lg);
   }
+
+  .nav-menu {
+    top: 64px;
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+  }
 }
 
 @media (max-width: 480px) {
   .navbar {
-    height: 4rem;
+    height: 64px;
   }
   
   .nav-container {
-    height: 4rem;
+    height: 64px;
     padding: 0 var(--space-3);
   }
   
   .hamburger {
-    width: 2rem;
-    height: 2rem;
+    width: 44px;
+    height: 44px;
+    padding: var(--space-2);
   }
   
   .hamburger .bar {
-    width: 1.25rem;
+    width: 20px;
+    height: 2px;
+  }
+
+  .nav-menu {
+    top: 64px;
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+  }
+
+  .nav-link {
+    padding: var(--space-3) var(--space-4);
+    min-height: 48px;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .nav-link {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .hamburger {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  .nav-link:active {
+    background-color: var(--color-bg-active);
+    transform: scale(0.98);
+    transition: all 0.1s ease;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .nav-link {
+    border: 1px solid transparent;
+  }
+  
+  .nav-link:focus-visible,
+  .nav-link:hover {
+    border-color: var(--color-text-primary);
+  }
+  
+  .navbar {
+    border-bottom: 2px solid var(--color-text-primary);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .nav-menu {
+    transition: opacity var(--transition-fast);
+  }
+  
+  .hamburger .bar {
+    transition: none;
+  }
+  
+  .nav-link::after {
+    transition: none;
   }
 }

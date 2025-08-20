@@ -69,9 +69,23 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
         
-        /* Hide content until fonts load */
+        /* Progressive font loading */
         .fonts-loading * {
             font-family: system-ui, -apple-system, sans-serif !important;
+        }
+        
+        .fonts-loading .lang-ar,
+        .fonts-loading .lang-fa {
+            font-family: 'Tahoma', 'Arial Unicode MS', system-ui, sans-serif !important;
+        }
+        
+        .fonts-loading .lang-zh {
+            font-family: 'Microsoft YaHei', 'SimHei', system-ui, sans-serif !important;
+        }
+        
+        /* Prevent layout shift with font-size-adjust */
+        .fonts-loading .hero-title {
+            font-size-adjust: 0.9;
         }
         
         /* Dark mode system preference */
@@ -84,8 +98,18 @@
         }
     </style>
     
-    <!-- Font loading with fallbacks -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Enhanced font loading with preload and fallbacks -->
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+    
+    <!-- Preload multilingual fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap" as="style">
+    
+    <!-- Load multilingual fonts asynchronously -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
     
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="styles/main.css">

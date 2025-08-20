@@ -239,52 +239,127 @@ class I18n {
         const previousLanguage = this.currentLanguage;
         this.currentLanguage = languageCode;
         
+        // Show loading state
+        this.showLanguageLoadingState();
+        
         try {
-            // Save preference
+            // Save preference immediately for faster perceived performance
             localStorage.setItem(this.storageKey, languageCode);
             
-            // Load new translations with error handling
-            await this.loadTranslations();
+            // Use Promise.all for parallel operations where possible
+            const [translationsResult] = await Promise.all([
+                this.loadTranslations(),
+                // Preload fonts for better performance
+                this.preloadLanguageFonts(languageCode)
+            ]);
             
-            // Apply translations
-            this.translatePage();
+            // Batch DOM updates for better performance
+            this.batchDOMUpdates(() => {
+                this.translatePage();
+                this.setDocumentDirection();
+                this.updateLanguageSelector();
+            });
             
-            // Update document direction
-            this.setDocumentDirection();
-            
-            // Update language selector
-            this.updateLanguageSelector();
+            // Hide loading state
+            this.hideLanguageLoadingState();
             
             // Trigger custom event for other components
-            window.dispatchEvent(new CustomEvent('languageChanged', {
-                detail: { 
-                    language: languageCode,
-                    previousLanguage: previousLanguage
-                }
-            }));
+            this.dispatchLanguageChangeEvent(languageCode, previousLanguage);
             
         } catch (error) {
             console.error('Language change failed:', error);
+            
+            // Hide loading state on error
+            this.hideLanguageLoadingState();
             
             // Revert to previous language
             this.currentLanguage = previousLanguage;
             localStorage.setItem(this.storageKey, previousLanguage);
             
-            // Attempt to reload previous translations
-            try {
-                await this.loadTranslations();
-                this.translatePage();
-                this.setDocumentDirection();
-                this.updateLanguageSelector();
-            } catch (revertError) {
-                console.error('Failed to revert language:', revertError);
-                // Use hardcoded fallbacks as last resort
-                this.translations = this.getHardcodedFallbacks();
-                this.translatePage();
-            }
+            // Attempt graceful recovery
+            await this.handleLanguageChangeError(previousLanguage);
             
             // Re-throw error for upstream handling
             throw error;
+        }
+    }
+    
+    showLanguageLoadingState() {
+        document.body.classList.add('language-switching');
+        
+        // Add loading indicator to language selector
+        const selector = document.querySelector('.language-selector-button');
+        if (selector) {
+            selector.classList.add('loading');
+            selector.disabled = true;
+        }
+    }
+    
+    hideLanguageLoadingState() {
+        document.body.classList.remove('language-switching');
+        
+        // Remove loading indicator
+        const selector = document.querySelector('.language-selector-button');
+        if (selector) {
+            selector.classList.remove('loading');
+            selector.disabled = false;
+        }
+    }
+    
+    async preloadLanguageFonts(languageCode) {
+        try {
+            if (languageCode === 'ar' || languageCode === 'fa') {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'style';
+                link.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700&display=swap';
+                document.head.appendChild(link);
+            } else if (languageCode === 'zh') {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'style';
+                link.href = 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap';
+                document.head.appendChild(link);
+            }
+        } catch (error) {
+            console.warn('Failed to preload fonts:', error);
+        }
+    }
+    
+    batchDOMUpdates(updateFunction) {
+        requestAnimationFrame(() => {
+            updateFunction();
+        });
+    }
+    
+    dispatchLanguageChangeEvent(languageCode, previousLanguage) {
+        const event = new CustomEvent('languageChanged', {
+            detail: { 
+                language: languageCode,
+                previousLanguage: previousLanguage,
+                timestamp: Date.now()
+            }
+        });
+        
+        // Dispatch with a slight delay to ensure DOM updates are complete
+        setTimeout(() => {
+            window.dispatchEvent(event);
+        }, 100);
+    }
+    
+    async handleLanguageChangeError(previousLanguage) {
+        try {
+            await this.loadTranslations();
+            this.batchDOMUpdates(() => {
+                this.translatePage();
+                this.setDocumentDirection();
+                this.updateLanguageSelector();
+            });
+        } catch (revertError) {
+            console.error('Failed to revert language:', revertError);
+            // Use hardcoded fallbacks as last resort
+            this.translations = this.getHardcodedFallbacks();
+            this.translatePage();
         }
     }
     
@@ -363,52 +438,129 @@ class I18n {
     }
     
     optimizeRTLRendering() {
-        // Force layout recalculation for RTL changes
+        // Improved RTL rendering optimization
         if (this.rtlLanguages.includes(this.currentLanguage)) {
-            // Temporarily hide body to prevent flickering
-            document.body.style.visibility = 'hidden';
-            
-            // Force reflow
-            document.body.offsetHeight;
-            
-            // Re-show body with smooth transition
-            setTimeout(() => {
-                document.body.style.visibility = 'visible';
-                document.body.classList.add('rtl-rendered');
-            }, 50);
-            
-            // Optimize Arabic/Persian text rendering
-            this.optimizeTextRendering();
+            // Use requestAnimationFrame for better performance
+            requestAnimationFrame(() => {
+                // Add smooth transition class
+                document.body.classList.add('language-transition');
+                
+                // Force layout recalculation
+                void document.body.offsetHeight;
+                
+                // Complete transition
+                requestAnimationFrame(() => {
+                    document.body.classList.add('rtl-rendered');
+                    
+                    // Optimize text rendering asynchronously
+                    this.optimizeTextRenderingAsync();
+                    
+                    // Remove transition class after animation
+                    setTimeout(() => {
+                        document.body.classList.remove('language-transition');
+                    }, 300);
+                });
+            });
+        } else {
+            // For LTR languages, simple cleanup
+            document.body.classList.remove('rtl-rendered');
         }
     }
     
-    optimizeTextRendering() {
+    optimizeTextRenderingAsync() {
         if (this.currentLanguage === 'ar' || this.currentLanguage === 'fa') {
-            try {
-                // Enable advanced text features for better Arabic/Persian rendering
-                const elements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div');
-                elements.forEach(element => {
-                    try {
-                        if (element.textContent && element.textContent.trim()) {
-                            element.style.fontFeatureSettings = "'liga' 1, 'calt' 1, 'kern' 1";
-                            element.style.textRendering = 'optimizeQuality';
-                            
-                            // Add subtle text shadow for better readability
-                            if (['H1', 'H2', 'H3'].includes(element.tagName)) {
-                                element.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.1)';
-                            }
-                        }
-                    } catch (elementError) {
-                        console.warn('Failed to optimize text rendering for element:', elementError);
+            // Use Intersection Observer for performance
+            this.createTextRenderingObserver();
+            
+            // Handle visible elements immediately
+            this.optimizeVisibleText();
+            
+            // Handle numeric content
+            this.handleNumericContent();
+        }
+    }
+    
+    createTextRenderingObserver() {
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.optimizeElementText(entry.target);
+                        observer.unobserve(entry.target);
                     }
                 });
-                
-                // Handle number display in Arabic/Persian contexts
-                this.handleNumericContent();
-                
-            } catch (error) {
-                console.error('Failed to optimize text rendering:', error);
+            }, {
+                rootMargin: '50px',
+                threshold: 0.1
+            });
+            
+            // Observe text elements
+            const elements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span');
+            elements.forEach(element => {
+                if (element.textContent && element.textContent.trim()) {
+                    observer.observe(element);
+                }
+            });
+        } else {
+            // Fallback for older browsers
+            this.optimizeVisibleText();
+        }
+    }
+    
+    optimizeVisibleText() {
+        try {
+            // Only optimize visible elements
+            const elements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p');
+            
+            // Use document fragment for better performance
+            const visibleElements = Array.from(elements).filter(element => {
+                const rect = element.getBoundingClientRect();
+                return rect.top < window.innerHeight && rect.bottom > 0;
+            });
+            
+            // Process in chunks to avoid blocking
+            this.processElementsInChunks(visibleElements, 5);
+            
+        } catch (error) {
+            console.error('Failed to optimize visible text:', error);
+        }
+    }
+    
+    processElementsInChunks(elements, chunkSize) {
+        let index = 0;
+        
+        const processChunk = () => {
+            const chunk = elements.slice(index, index + chunkSize);
+            
+            chunk.forEach(element => {
+                this.optimizeElementText(element);
+            });
+            
+            index += chunkSize;
+            
+            if (index < elements.length) {
+                requestAnimationFrame(processChunk);
             }
+        };
+        
+        processChunk();
+    }
+    
+    optimizeElementText(element) {
+        try {
+            if (element.textContent && element.textContent.trim()) {
+                element.style.fontFeatureSettings = "'liga' 1, 'calt' 1, 'kern' 1";
+                element.style.textRendering = 'optimizeQuality';
+                element.style.WebkitFontSmoothing = 'antialiased';
+                element.style.MozOsxFontSmoothing = 'grayscale';
+                
+                // Add subtle text shadow for headings
+                if (['H1', 'H2', 'H3'].includes(element.tagName)) {
+                    element.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.1)';
+                }
+            }
+        } catch (error) {
+            console.warn('Failed to optimize element text:', error);
         }
     }
     

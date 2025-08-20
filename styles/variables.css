@@ -70,16 +70,17 @@
   --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-family-mono: 'JetBrains Mono', 'Fira Code', Consolas, 'Monaco', monospace;
   
-  /* Font Sizes (Perfect Fourth Scale) */
-  --font-size-xs: 0.75rem;      /* 12px */
-  --font-size-sm: 0.875rem;     /* 14px */
-  --font-size-base: 1rem;       /* 16px */
-  --font-size-lg: 1.125rem;     /* 18px */
-  --font-size-xl: 1.333rem;     /* 21px */
-  --font-size-2xl: 1.777rem;    /* 28px */
-  --font-size-3xl: 2.369rem;    /* 38px */
-  --font-size-4xl: 3.157rem;    /* 51px */
-  --font-size-5xl: 4.209rem;    /* 67px */
+  /* Fluid Font Sizes using clamp() for responsive typography */
+  --font-size-xs: clamp(0.7rem, 0.66rem + 0.2vw, 0.75rem);          /* 11px - 12px */
+  --font-size-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);        /* 13px - 14px */
+  --font-size-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);          /* 14px - 16px */
+  --font-size-lg: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);           /* 16px - 18px */
+  --font-size-xl: clamp(1.125rem, 1rem + 0.6vw, 1.333rem);          /* 18px - 21px */
+  --font-size-2xl: clamp(1.333rem, 1.1rem + 1.15vw, 1.777rem);      /* 21px - 28px */
+  --font-size-3xl: clamp(1.777rem, 1.4rem + 1.85vw, 2.369rem);      /* 28px - 38px */
+  --font-size-4xl: clamp(2.369rem, 1.8rem + 2.8vw, 3.157rem);       /* 38px - 51px */
+  --font-size-5xl: clamp(3.157rem, 2.4rem + 3.8vw, 4.209rem);       /* 51px - 67px */
+  --font-size-6xl: clamp(4.209rem, 3rem + 6vw, 5.610rem);           /* 67px - 90px */
   
   /* Font Weights */
   --font-weight-light: 300;
@@ -88,10 +89,11 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   
-  /* Line Heights */
-  --line-height-tight: 1.25;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
+  /* Responsive Line Heights */
+  --line-height-tight: clamp(1.2, 1.15 + 0.25vw, 1.25);
+  --line-height-normal: clamp(1.4, 1.35 + 0.25vw, 1.5);
+  --line-height-relaxed: clamp(1.6, 1.55 + 0.5vw, 1.75);
+  --line-height-loose: clamp(1.8, 1.7 + 0.5vw, 2.0);
   
   /* Spacing Scale (8px Grid System) */
   --space-0: 0;
@@ -151,11 +153,18 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
   
-  /* RTL/LTR Specific Variables */
-  --rtl-spacing: 0.15em;
-  --arabic-line-height: 1.8;
-  --persian-line-height: 1.9;
+  /* RTL/LTR Specific Variables with fluid typography */
+  --rtl-spacing: clamp(0.1em, 0.05em + 0.5vw, 0.2em);
+  --arabic-line-height: clamp(1.7, 1.6 + 0.5vw, 1.9);
+  --persian-line-height: clamp(1.8, 1.7 + 0.5vw, 2.0);
+  --chinese-line-height: clamp(1.6, 1.5 + 0.5vw, 1.8);
   --rtl-border-radius: var(--radius-lg);
+  
+  /* Language-specific font sizing */
+  --arabic-font-scale: 1.1;
+  --persian-font-scale: 1.1;
+  --chinese-font-scale: 1.05;
+  --cyrillic-font-scale: 1.0;
   
   /* Content Width Constraints */
   --container-sm: 640px;
@@ -229,7 +238,7 @@
   }
 }
 
-/* Language-Specific Variables */
+/* Enhanced Language-Specific Variables */
 :root[lang="ar"],
 :root[lang="fa"],
 [dir="rtl"] {
@@ -241,6 +250,25 @@
   --margin-end: margin-left;
   --padding-start: padding-right;
   --padding-end: padding-left;
+  --font-family-primary: 'Noto Sans Arabic', 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --line-height-base: var(--arabic-line-height);
+}
+
+:root[lang="fa"] {
+  --font-family-primary: 'Noto Sans Arabic', 'Vazir', 'Tahoma', sans-serif;
+  --line-height-base: var(--persian-line-height);
+}
+
+:root[lang="zh"],
+:root[lang="zh-CN"],
+:root[lang="zh-TW"] {
+  --font-family-primary: 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Source Han Sans SC', 'Microsoft YaHei', sans-serif;
+  --line-height-base: var(--chinese-line-height);
+}
+
+:root[lang="ru"] {
+  --font-family-primary: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --line-height-base: var(--line-height-normal);
 }
 
 :root[lang="en"],
@@ -255,6 +283,7 @@
   --margin-end: margin-right;
   --padding-start: padding-left;
   --padding-end: padding-right;
+  --line-height-base: var(--line-height-normal);
 }
 
 /* High Contrast Support */
