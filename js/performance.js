@@ -210,7 +210,7 @@ class PerformanceManager {
                     };
 
                     // Log performance metrics (remove in production)
-                    if (process.env.NODE_ENV === 'development') {
+                    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
                         console.log('Performance Metrics:', metrics);
                     }
 
@@ -235,7 +235,7 @@ class PerformanceManager {
                 const entries = list.getEntries();
                 const lastEntry = entries[entries.length - 1];
                 
-                if (process.env.NODE_ENV === 'development') {
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
                     console.log('LCP:', Math.round(lastEntry.startTime));
                 }
             });

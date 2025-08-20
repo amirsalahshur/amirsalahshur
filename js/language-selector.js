@@ -2,6 +2,11 @@
 class LanguageSelector {
     constructor() {
         this.isOpen = false;
+        this.destroyed = false;
+        this.timeouts = new Set();
+        this.eventListeners = new Map();
+        this.boundHandlers = new Map();
+        this.observers = new Set();
         this.init();
     }
     

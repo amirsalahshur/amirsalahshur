@@ -329,6 +329,110 @@ class NavigationManager {
         this.observers.add(this.lazyObserver);
     }
 
+    // Initialize contact form
+    initializeContactForm() {
+        const contactForm = document.querySelector('#contact-form, .contact-form');
+        if (contactForm) {
+            const submitHandler = (e) => {
+                this.handleContactForm(e);
+            };
+            
+            contactForm.addEventListener('submit', submitHandler);
+            this.eventListeners.set(contactForm, ['submit']);
+            this.boundHandlers.set('contactFormSubmit', submitHandler);
+            
+            // Initialize form enhancements
+            this.initializeFormEnhancements(contactForm);
+        }
+    }
+
+    // Initialize skill bars animation
+    initializeSkillBars() {
+        const skillBars = document.querySelectorAll('.skill-progress, .skill-bar');
+        if (skillBars.length > 0) {
+            this.animateSkillBars();
+        }
+    }
+
+    // Initialize smooth scrolling for anchor links
+    initializeSmoothScrolling() {
+        const anchorLinks = document.querySelectorAll('a[href^="#"]');
+        anchorLinks.forEach(link => {
+            const clickHandler = (e) => {
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            };
+            
+            link.addEventListener('click', clickHandler);
+            this.eventListeners.set(link, ['click']);
+            this.boundHandlers.set(`anchorLink-${link.href}`, clickHandler);
+        });
+    }
+
+    // Initialize touch events for mobile interactions
+    initializeTouchEvents() {
+        if ('ontouchstart' in window) {
+            const touchElements = document.querySelectorAll('.btn, .work-item, .social-link');
+            
+            touchElements.forEach(element => {
+                const touchStartHandler = () => {
+                    element.classList.add('touch-active');
+                };
+                
+                const touchEndHandler = () => {
+                    setTimeout(() => {
+                        element.classList.remove('touch-active');
+                    }, 150);
+                };
+                
+                element.addEventListener('touchstart', touchStartHandler, { passive: true });
+                element.addEventListener('touchend', touchEndHandler, { passive: true });
+                
+                this.eventListeners.set(element, ['touchstart', 'touchend']);
+                this.boundHandlers.set(`${element.className}-touchstart`, touchStartHandler);
+                this.boundHandlers.set(`${element.className}-touchend`, touchEndHandler);
+            });
+        }
+    }
+
+    // Initialize resize handler for responsive behavior
+    initializeResizeHandler() {
+        const resizeHandler = this.debounce(() => {
+            // Close mobile menu on resize to desktop
+            if (window.innerWidth > 768 && this.navMenu && this.navMenu.classList.contains('active')) {
+                this.closeMobileMenu();
+            }
+            
+            // Update any responsive elements
+            this.updateResponsiveElements();
+        }, 250);
+        
+        window.addEventListener('resize', resizeHandler, { passive: true });
+        this.eventListeners.set(window, ['resize']);
+        this.boundHandlers.set('windowresize', resizeHandler);
+    }
+
+    // Helper method for responsive updates
+    updateResponsiveElements() {
+        // Update navbar state based on screen size
+        const navbar = document.querySelector('.navbar');
+        if (navbar) {
+            if (window.innerWidth <= 768) {
+                navbar.classList.add('mobile');
+            } else {
+                navbar.classList.remove('mobile');
+            }
+        }
+    }
+
     // Contact form handling
     handleContactForm(event) {
         event.preventDefault();
