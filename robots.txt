@@ -1,0 +1,33 @@
+# Robots.txt for Amir Salahshur Portfolio
+# https://amirsalahshur.xyz
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://amirsalahshur.xyz/sitemap.xml
+
+# Disallow certain files and directories
+Disallow: /js/translations/
+Disallow: /*.json$
+Disallow: /sw.js
+Disallow: /test-*.html
+
+# Allow social media crawlers
+User-agent: facebookexternalhit/*
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Crawl delay for general bots
+Crawl-delay: 1
+
+# Host declaration
+Host: https://amirsalahshur.xyz

@@ -204,6 +204,59 @@
   }
 }
 
+/* System Preference Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-primary: var(--primary-400);
+    --color-primary-hover: var(--primary-300);
+    --color-primary-light: var(--primary-950);
+    
+    --color-text-primary: var(--neutral-100);
+    --color-text-secondary: var(--neutral-300);
+    --color-text-muted: var(--neutral-400);
+    --color-text-light: var(--neutral-500);
+    --color-text-inverse: var(--neutral-900);
+    
+    --color-bg-primary: var(--neutral-900);
+    --color-bg-secondary: var(--neutral-800);
+    --color-bg-tertiary: var(--neutral-700);
+    --color-bg-hover: var(--neutral-800);
+    --color-bg-active: var(--neutral-700);
+    
+    --color-border: var(--neutral-700);
+    --color-border-light: var(--neutral-600);
+    --color-border-strong: var(--neutral-600);
+  }
+}
+
+/* Language-Specific Variables */
+:root[lang="ar"],
+:root[lang="fa"],
+[dir="rtl"] {
+  --text-direction: rtl;
+  --text-align: right;
+  --border-start: border-right;
+  --border-end: border-left;
+  --margin-start: margin-right;
+  --margin-end: margin-left;
+  --padding-start: padding-right;
+  --padding-end: padding-left;
+}
+
+:root[lang="en"],
+:root[lang="fr"],
+:root[lang="de"],
+[dir="ltr"] {
+  --text-direction: ltr;
+  --text-align: left;
+  --border-start: border-left;
+  --border-end: border-right;
+  --margin-start: margin-left;
+  --margin-end: margin-right;
+  --padding-start: padding-left;
+  --padding-end: padding-right;
+}
+
 /* High Contrast Support */
 @media (prefers-contrast: high) {
   :root {
