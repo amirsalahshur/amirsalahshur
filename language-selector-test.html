@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Language Selector Test Page - Comprehensive Testing">
+    <title>Language Selector Test - Amir Salahshur</title>
+    
+    <!-- Font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Vazir:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/language-selector.css">
+    
+    <!-- Scripts -->
+    <script src="js/i18n.js" defer></script>
+    <script src="js/language-selector.js" defer></script>
+    
+    <style>
+        /* Test page specific styles */
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .test-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .test-card {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .test-button:hover {
+            background: #2563eb;
+        }
+        
+        .test-result {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        .test-result.success {
+            background: #d1fae5;
+            border: 1px solid #10b981;
+            color: #065f46;
+        }
+        
+        .test-result.error {
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #991b1b;
+        }
+        
+        .test-log {
+            height: 200px;
+            overflow-y: auto;
+            background: #1f2937;
+            color: #d1d5db;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .rtl-demo {
+            direction: rtl;
+            text-align: right;
+            background: #fef3c7;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+        
+        .mobile-simulator {
+            max-width: 375px;
+            margin: 0 auto;
+            border: 2px solid #374151;
+            border-radius: 20px;
+            padding: 1rem;
+            background: white;
+        }
+        
+        /* Navigation simulation */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #1f2937;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .nav-menu a {
+            color: #6b7280;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .nav-menu a:hover {
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+        
+        .hamburger {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1 data-i18n="test.title">Language Selector Test Page</h1>
+            <p data-i18n="test.subtitle">Comprehensive testing of all language selector features</p>
+        </div>
+        
+        <!-- Navigation Test -->
+        <div class="test-section">
+            <h2 data-i18n="test.nav_section">Navigation Integration Test</h2>
+            <p data-i18n="test.nav_description">The language selector should appear in the navigation below:</p>
+            
+            <div class="nav-container">
+                <div class="nav-logo">Amir Salahshur</div>
+                <div class="nav-menu">
+                    <a href="#" data-i18n="nav.home">Home</a>
+                    <a href="#" data-i18n="nav.work">Work</a>
+                    <a href="#" data-i18n="nav.about">About</a>
+                    <a href="#" data-i18n="nav.contact">Contact</a>
+                </div>
+                <!-- Language selector will be inserted here automatically -->
+                <div class="hamburger">
+                    <span>☰</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Functionality Tests -->
+        <div class="test-grid">
+            <div class="test-card">
+                <h3 data-i18n="test.basic_functionality">Basic Functionality</h3>
+                <p data-i18n="test.basic_desc">Test basic language selector operations</p>
+                <button class="test-button" onclick="testBasicFunctionality()" data-i18n="test.run_test">Run Test</button>
+                <div id="basic-result" class="test-result"></div>
+            </div>
+            
+            <div class="test-card">
+                <h3 data-i18n="test.accessibility">Accessibility Testing</h3>
+                <p data-i18n="test.accessibility_desc">Test keyboard navigation and screen reader support</p>
+                <button class="test-button" onclick="testAccessibility()" data-i18n="test.run_test">Run Test</button>
+                <div id="accessibility-result" class="test-result"></div>
+            </div>
+            
+            <div class="test-card">
+                <h3 data-i18n="test.rtl_support">RTL Language Support</h3>
+                <p data-i18n="test.rtl_desc">Test Arabic and Persian language support</p>
+                <button class="test-button" onclick="testRTLSupport()" data-i18n="test.run_test">Run Test</button>
+                <div id="rtl-result" class="test-result"></div>
+            </div>
+            
+            <div class="test-card">
+                <h3 data-i18n="test.mobile_responsive">Mobile Responsiveness</h3>
+                <p data-i18n="test.mobile_desc">Test mobile touch interactions</p>
+                <button class="test-button" onclick="testMobileResponsiveness()" data-i18n="test.run_test">Run Test</button>
+                <div id="mobile-result" class="test-result"></div>
+            </div>
+            
+            <div class="test-card">
+                <h3 data-i18n="test.error_handling">Error Handling</h3>
+                <p data-i18n="test.error_desc">Test error scenarios and recovery</p>
+                <button class="test-button" onclick="testErrorHandling()" data-i18n="test.run_test">Run Test</button>
+                <div id="error-result" class="test-result"></div>
+            </div>
+            
+            <div class="test-card">
+                <h3 data-i18n="test.performance">Performance Testing</h3>
+                <p data-i18n="test.performance_desc">Test loading times and memory usage</p>
+                <button class="test-button" onclick="testPerformance()" data-i18n="test.run_test">Run Test</button>
+                <div id="performance-result" class="test-result"></div>
+            </div>
+        </div>
+        
+        <!-- Quick Language Tests -->
+        <div class="test-section">
+            <h2 data-i18n="test.quick_tests">Quick Language Tests</h2>
+            <p data-i18n="test.quick_desc">Test each supported language quickly:</p>
+            <button class="test-button" onclick="quickTestLanguage('en')">English</button>
+            <button class="test-button" onclick="quickTestLanguage('ru')">Русский</button>
+            <button class="test-button" onclick="quickTestLanguage('ar')">العربية</button>
+            <button class="test-button" onclick="quickTestLanguage('de')">Deutsch</button>
+            <button class="test-button" onclick="quickTestLanguage('fr')">Français</button>
+            <button class="test-button" onclick="quickTestLanguage('zh')">中文</button>
+            <button class="test-button" onclick="quickTestLanguage('fa')">فارسی</button>
+        </div>
+        
+        <!-- RTL Demo -->
+        <div class="test-section">
+            <h2 data-i18n="test.rtl_demo">RTL Language Demo</h2>
+            <div class="rtl-demo">
+                <h3 data-i18n="test.rtl_demo_title">هذا نص تجريبي باللغة العربية</h3>
+                <p data-i18n="test.rtl_demo_text">هذا مثال على كيفية عرض النص العربي والفارسي في التطبيق. يجب أن يظهر النص من اليمين إلى اليسار مع المحاذاة الصحيحة.</p>
+            </div>
+            <div class="rtl-demo">
+                <h3 data-i18n="test.rtl_demo_title_fa">این متن نمونه به زبان فارسی است</h3>
+                <p data-i18n="test.rtl_demo_text_fa">این نمونه‌ای از نحوه نمایش متن فارسی در برنامه است. متن باید از راست به چپ نمایش داده شود.</p>
+            </div>
+        </div>
+        
+        <!-- Mobile Simulator -->
+        <div class="test-section">
+            <h2 data-i18n="test.mobile_sim">Mobile Simulator</h2>
+            <div class="mobile-simulator">
+                <div class="nav-container">
+                    <div class="nav-logo">Logo</div>
+                    <!-- Language selector will appear here -->
+                    <div class="hamburger">
+                        <span>☰</span>
+                    </div>
+                </div>
+                <p data-i18n="test.mobile_sim_desc">This simulates mobile view. Test touch interactions.</p>
+            </div>
+        </div>
+        
+        <!-- Console Log -->
+        <div class="test-section">
+            <h2 data-i18n="test.console_log">Console Log</h2>
+            <div id="console-log" class="test-log">
+                <div>Language selector test page loaded...</div>
+                <div>Waiting for components to initialize...</div>
+            </div>
+            <button class="test-button" onclick="clearLog()" data-i18n="test.clear_log">Clear Log</button>
+        </div>
+        
+        <!-- All Tests Button -->
+        <div class="test-section" style="text-align: center;">
+            <button class="test-button" onclick="runAllTests()" style="background: #10b981; padding: 1rem 2rem; font-size: 1.1rem;" data-i18n="test.run_all">Run All Tests</button>
+        </div>
+    </div>
+    
+    <script>
+        let testLog = [];
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            testLog.push({ message: logEntry, type });
+            
+            const logElement = document.getElementById('console-log');
+            const div = document.createElement('div');
+            div.textContent = logEntry;
+            div.style.color = type === 'error' ? '#ef4444' : type === 'success' ? '#10b981' : '#d1d5db';
+            logElement.appendChild(div);
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        function clearLog() {
+            testLog = [];
+            document.getElementById('console-log').innerHTML = '<div>Console cleared...</div>';
+        }
+        
+        function showResult(elementId, message, success = true) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `test-result ${success ? 'success' : 'error'}`;
+        }
+        
+        function testBasicFunctionality() {
+            log('Running basic functionality test...');
+            
+            try {
+                const selector = window.languageSelector;
+                if (!selector) {
+                    throw new Error('Language selector instance not found');
+                }
+                
+                // Test selector exists
+                const button = document.querySelector('.language-selector-button');
+                if (!button) {
+                    throw new Error('Language selector button not found');
+                }
+                
+                // Test dropdown exists
+                const dropdown = document.querySelector('.language-dropdown');
+                if (!dropdown) {
+                    throw new Error('Language dropdown not found');
+                }
+                
+                // Test supported languages
+                if (!selector.supportedLanguages || selector.supportedLanguages.length === 0) {
+                    throw new Error('No supported languages found');
+                }
+                
+                showResult('basic-result', '✅ All basic functionality tests passed!');
+                log('Basic functionality test completed successfully', 'success');
+                
+            } catch (error) {
+                showResult('basic-result', `❌ Error: ${error.message}`, false);
+                log(`Basic functionality test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        function testAccessibility() {
+            log('Running accessibility test...');
+            
+            try {
+                const button = document.querySelector('.language-selector-button');
+                const dropdown = document.querySelector('.language-dropdown');
+                
+                // Check ARIA attributes
+                const requiredAttributes = ['aria-label', 'aria-expanded', 'aria-haspopup'];
+                const missingAttributes = requiredAttributes.filter(attr => !button.hasAttribute(attr));
+                
+                if (missingAttributes.length > 0) {
+                    throw new Error(`Missing ARIA attributes: ${missingAttributes.join(', ')}`);
+                }
+                
+                // Check options have proper roles
+                const options = document.querySelectorAll('.language-option');
+                const invalidOptions = Array.from(options).filter(opt => opt.getAttribute('role') !== 'option');
+                
+                if (invalidOptions.length > 0) {
+                    throw new Error('Some language options missing proper role attribute');
+                }
+                
+                // Check live region exists
+                const liveRegion = document.querySelector('#language-announcements');
+                if (!liveRegion) {
+                    log('Warning: Live region not found (may be created later)', 'warning');
+                }
+                
+                showResult('accessibility-result', '✅ Accessibility tests passed!');
+                log('Accessibility test completed successfully', 'success');
+                
+            } catch (error) {
+                showResult('accessibility-result', `❌ Error: ${error.message}`, false);
+                log(`Accessibility test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        function testRTLSupport() {
+            log('Running RTL support test...');
+            
+            try {
+                // Test Arabic language
+                quickTestLanguage('ar');
+                
+                setTimeout(() => {
+                    const htmlDir = document.documentElement.getAttribute('dir');
+                    const bodyLang = document.body.className;
+                    
+                    if (htmlDir !== 'rtl') {
+                        throw new Error('Document direction not set to RTL for Arabic');
+                    }
+                    
+                    if (!bodyLang.includes('lang-ar')) {
+                        throw new Error('Arabic language class not applied to body');
+                    }
+                    
+                    showResult('rtl-result', '✅ RTL support tests passed!');
+                    log('RTL support test completed successfully', 'success');
+                    
+                    // Switch back to English
+                    setTimeout(() => quickTestLanguage('en'), 1000);
+                    
+                }, 1000);
+                
+            } catch (error) {
+                showResult('rtl-result', `❌ Error: ${error.message}`, false);
+                log(`RTL support test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        function testMobileResponsiveness() {
+            log('Running mobile responsiveness test...');
+            
+            try {
+                const button = document.querySelector('.language-selector-button');
+                const dropdown = document.querySelector('.language-dropdown');
+                
+                // Test touch action
+                const touchAction = getComputedStyle(button).touchAction;
+                if (touchAction !== 'manipulation') {
+                    log('Warning: Touch action not set to manipulation', 'warning');
+                }
+                
+                // Test minimum touch target size
+                const rect = button.getBoundingClientRect();
+                if (rect.height < 44) {
+                    log('Warning: Button height less than 44px minimum touch target', 'warning');
+                }
+                
+                // Test responsive classes
+                const viewport = window.innerWidth;
+                log(`Current viewport width: ${viewport}px`);
+                
+                showResult('mobile-result', '✅ Mobile responsiveness tests passed!');
+                log('Mobile responsiveness test completed successfully', 'success');
+                
+            } catch (error) {
+                showResult('mobile-result', `❌ Error: ${error.message}`, false);
+                log(`Mobile responsiveness test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        function testErrorHandling() {
+            log('Running error handling test...');
+            
+            try {
+                const selector = window.languageSelector;
+                
+                // Test invalid language code
+                selector.selectLanguage('invalid-code').catch(error => {
+                    log('Error handling working correctly for invalid language code', 'success');
+                });
+                
+                // Test loading state
+                selector.setLoadingState(true);
+                const button = document.querySelector('.language-selector-button');
+                if (!button.classList.contains('loading')) {
+                    throw new Error('Loading state not applied to button');
+                }
+                
+                selector.setLoadingState(false);
+                if (button.classList.contains('loading')) {
+                    throw new Error('Loading state not removed from button');
+                }
+                
+                showResult('error-result', '✅ Error handling tests passed!');
+                log('Error handling test completed successfully', 'success');
+                
+            } catch (error) {
+                showResult('error-result', `❌ Error: ${error.message}`, false);
+                log(`Error handling test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        function testPerformance() {
+            log('Running performance test...');
+            
+            try {
+                const startTime = performance.now();
+                
+                // Test multiple language switches
+                const languages = ['en', 'ru', 'ar', 'de', 'fr'];
+                let index = 0;
+                
+                const testSwitch = () => {
+                    if (index < languages.length) {
+                        quickTestLanguage(languages[index]);
+                        index++;
+                        setTimeout(testSwitch, 200);
+                    } else {
+                        const endTime = performance.now();
+                        const duration = endTime - startTime;
+                        
+                        log(`Performance test completed in ${duration.toFixed(2)}ms`);
+                        
+                        if (duration < 5000) {
+                            showResult('performance-result', `✅ Performance good: ${duration.toFixed(2)}ms`);
+                            log('Performance test passed', 'success');
+                        } else {
+                            showResult('performance-result', `⚠️ Performance slow: ${duration.toFixed(2)}ms`);
+                            log('Performance test completed with warnings', 'warning');
+                        }
+                    }
+                };
+                
+                testSwitch();
+                
+            } catch (error) {
+                showResult('performance-result', `❌ Error: ${error.message}`, false);
+                log(`Performance test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        function quickTestLanguage(langCode) {
+            log(`Switching to language: ${langCode}`);
+            
+            if (window.languageSelector) {
+                window.languageSelector.selectLanguage(langCode);
+            } else if (window.i18n) {
+                window.i18n.changeLanguage(langCode);
+            } else {
+                log('No language system available', 'error');
+            }
+        }
+        
+        function runAllTests() {
+            log('Starting comprehensive test suite...', 'success');
+            
+            setTimeout(() => testBasicFunctionality(), 500);
+            setTimeout(() => testAccessibility(), 1000);
+            setTimeout(() => testMobileResponsiveness(), 1500);
+            setTimeout(() => testErrorHandling(), 2000);
+            setTimeout(() => testPerformance(), 2500);
+            setTimeout(() => testRTLSupport(), 7000); // After performance test completes
+            
+            setTimeout(() => {
+                log('All tests completed!', 'success');
+            }, 10000);
+        }
+        
+        // Initialize test page
+        document.addEventListener('DOMContentLoaded', () => {
+            log('Test page DOM loaded');
+            
+            // Wait for language selector to initialize
+            setTimeout(() => {
+                if (window.languageSelector) {
+                    log('Language selector initialized successfully', 'success');
+                } else {
+                    log('Language selector not found', 'error');
+                }
+                
+                if (window.i18n) {
+                    log('i18n system initialized successfully', 'success');
+                } else {
+                    log('i18n system not found', 'error');
+                }
+            }, 2000);
+        });
+        
+        // Listen for language change events
+        window.addEventListener('languageChanged', (e) => {
+            log(`Language changed from ${e.detail.previousLanguage} to ${e.detail.language}`, 'success');
+        });
+    </script>
+</body>
+</html>

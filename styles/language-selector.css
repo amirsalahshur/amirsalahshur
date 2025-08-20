@@ -1,0 +1,684 @@
+/* Enhanced Language Selector Styles with Comprehensive RTL Support and Accessibility */
+
+/* CSS Variables for Language Selector */
+:root {
+  /* Language Selector Colors */
+  --language-selector-bg: var(--color-bg-secondary, #f8fafc);
+  --language-selector-bg-hover: var(--color-bg-hover, #f1f5f9);
+  --language-selector-border: var(--color-border, #e2e8f0);
+  --language-selector-border-focus: var(--color-border-focus, #3b82f6);
+  --language-selector-text: var(--color-text-primary, #0f172a);
+  --language-selector-text-secondary: var(--color-text-secondary, #64748b);
+  --language-selector-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+  
+  /* Dark mode overrides */
+  --language-selector-bg-dark: var(--color-bg-secondary-dark, #1e293b);
+  --language-selector-bg-hover-dark: var(--color-bg-hover-dark, #334155);
+  --language-selector-border-dark: var(--color-border-dark, #475569);
+  --language-selector-text-dark: var(--color-text-primary-dark, #f8fafc);
+  
+  /* Dimensions */
+  --language-selector-button-height: 40px;
+  --language-selector-dropdown-width: 240px;
+  --language-selector-option-height: 48px;
+  --language-selector-border-radius: var(--radius-lg, 8px);
+  
+  /* Animation */
+  --language-selector-transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+  --language-selector-transition-fast: all 0.15s ease-out;
+}
+
+/* Base Language Selector Container */
+.language-selector {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  z-index: 1000;
+}
+
+/* Language Selector Button */
+.language-selector-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: var(--language-selector-button-height);
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--language-selector-text);
+  background-color: var(--language-selector-bg);
+  border: 1px solid var(--language-selector-border);
+  border-radius: var(--language-selector-border-radius);
+  cursor: pointer;
+  transition: var(--language-selector-transition);
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-width: 100px;
+  max-width: 160px;
+}
+
+/* Button States */
+.language-selector-button:hover:not(:disabled) {
+  background-color: var(--language-selector-bg-hover);
+  border-color: var(--language-selector-border-focus);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.language-selector-button:focus-visible {
+  outline: 2px solid var(--language-selector-border-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.language-selector-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.language-selector-button.open {
+  background-color: var(--language-selector-bg-hover);
+  border-color: var(--language-selector-border-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.language-selector-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.language-selector-button.loading {
+  opacity: 0.8;
+  cursor: wait;
+}
+
+/* Touch feedback for mobile */
+.language-selector-button.touch-active {
+  background-color: var(--language-selector-bg-hover);
+  transform: scale(0.98);
+}
+
+/* Button Content */
+.current-language-flag {
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.current-language-name {
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+
+.language-arrow {
+  flex-shrink: 0;
+  transition: var(--language-selector-transition-fast);
+  opacity: 0.7;
+}
+
+.language-selector-button.open .language-arrow {
+  transform: rotate(180deg);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: none;
+  flex-shrink: 0;
+}
+
+.loading-spinner .loading-icon {
+  animation: spin 1s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Language Dropdown */
+.language-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: var(--language-selector-dropdown-width);
+  max-width: 320px;
+  max-height: 300px;
+  background: white;
+  border: 1px solid var(--language-selector-border);
+  border-radius: var(--language-selector-border-radius);
+  box-shadow: var(--language-selector-shadow);
+  overflow: hidden;
+  transform: translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--language-selector-transition);
+  z-index: 1001;
+}
+
+.language-dropdown.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Dropdown Header */
+.language-dropdown-header {
+  padding: 12px 16px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--language-selector-text-secondary);
+  background-color: rgba(248, 250, 252, 0.8);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+/* Language Options Container */
+.language-options {
+  padding: 4px 0;
+  max-height: 240px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Individual Language Option */
+.language-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--language-selector-text);
+  cursor: pointer;
+  transition: var(--language-selector-transition-fast);
+  position: relative;
+  min-height: var(--language-selector-option-height);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.language-option:hover,
+.language-option.focused {
+  background-color: rgba(59, 130, 246, 0.08);
+  color: var(--language-selector-border-focus);
+}
+
+.language-option:focus-visible {
+  outline: 2px solid var(--language-selector-border-focus);
+  outline-offset: -2px;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.language-option:active {
+  background-color: rgba(59, 130, 246, 0.15);
+}
+
+.language-option[aria-selected="true"],
+.language-option.selected {
+  background-color: rgba(59, 130, 246, 0.1);
+  color: var(--language-selector-border-focus);
+  font-weight: 600;
+}
+
+/* Language Option Content */
+.language-flag {
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+}
+
+.language-name {
+  flex: 1;
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.language-check {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--language-selector-border-focus);
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+/* RTL Language Support */
+[dir="rtl"] .language-selector {
+  direction: rtl;
+}
+
+[dir="rtl"] .language-selector-button {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+[dir="rtl"] .language-dropdown {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .language-option {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+[dir="rtl"] .language-dropdown-header {
+  text-align: right;
+}
+
+/* RTL Language-Specific Typography */
+.language-selector.rtl-context,
+.language-selector[data-rtl="true"] {
+  direction: rtl;
+}
+
+.language-selector.rtl-context .language-dropdown {
+  right: auto;
+  left: 0;
+}
+
+.language-selector.rtl-context .language-option {
+  text-align: right;
+}
+
+/* Language Change Feedback */
+.language-change-feedback {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  padding: 8px 12px;
+  background: rgba(34, 197, 94, 0.9);
+  color: white;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  transform: translateY(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--language-selector-transition);
+  z-index: 1002;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.language-change-feedback.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.language-change-feedback.error {
+  background: rgba(239, 68, 68, 0.9);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+[dir="rtl"] .language-change-feedback {
+  right: auto;
+  left: 0;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .language-selector {
+    position: relative;
+  }
+  
+  .language-selector-button {
+    min-width: 80px;
+    max-width: 120px;
+    height: 36px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+  
+  .language-dropdown {
+    min-width: 200px;
+    max-width: calc(100vw - 32px);
+    right: 0;
+    left: auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .language-dropdown.mobile-optimized {
+    position: fixed;
+    top: auto;
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    max-height: 60vh;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .language-option {
+    padding: 16px;
+    min-height: 56px;
+    font-size: 15px;
+  }
+  
+  .language-flag {
+    font-size: 20px;
+    width: 28px;
+  }
+  
+  .current-language-name {
+    display: none;
+  }
+  
+  .language-change-feedback {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    left: 16px;
+    text-align: center;
+    z-index: 1003;
+  }
+}
+
+@media (max-width: 480px) {
+  .language-selector-button {
+    min-width: 44px;
+    max-width: 44px;
+    padding: 0 8px;
+  }
+  
+  .current-language-flag {
+    font-size: 18px;
+  }
+  
+  .language-dropdown {
+    min-width: 180px;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .language-selector-button {
+    border-width: 2px;
+  }
+  
+  .language-option:hover,
+  .language-option.focused {
+    background-color: rgba(0, 0, 0, 0.1);
+    outline: 2px solid currentColor;
+  }
+  
+  .language-option[aria-selected="true"] {
+    background-color: rgba(0, 0, 0, 0.15);
+    outline: 2px solid currentColor;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .language-selector-button,
+  .language-dropdown,
+  .language-option,
+  .language-arrow,
+  .loading-spinner .loading-icon,
+  .language-change-feedback {
+    transition: none;
+    animation: none;
+  }
+  
+  .language-selector-button:hover {
+    transform: none;
+  }
+  
+  .language-selector-button.touch-active {
+    transform: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .language-selector-button {
+    background-color: var(--language-selector-bg-dark);
+    border-color: var(--language-selector-border-dark);
+    color: var(--language-selector-text-dark);
+  }
+  
+  .language-selector-button:hover:not(:disabled) {
+    background-color: var(--language-selector-bg-hover-dark);
+  }
+  
+  .language-dropdown {
+    background: var(--language-selector-bg-dark);
+    border-color: var(--language-selector-border-dark);
+  }
+  
+  .language-dropdown-header {
+    background-color: rgba(30, 41, 59, 0.8);
+    border-bottom-color: rgba(71, 85, 105, 0.5);
+  }
+  
+  .language-option {
+    color: var(--language-selector-text-dark);
+  }
+  
+  .language-option:hover,
+  .language-option.focused {
+    background-color: rgba(59, 130, 246, 0.15);
+  }
+  
+  .language-option[aria-selected="true"] {
+    background-color: rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* Custom dark mode class support */
+.dark .language-selector-button {
+  background-color: var(--language-selector-bg-dark);
+  border-color: var(--language-selector-border-dark);
+  color: var(--language-selector-text-dark);
+}
+
+.dark .language-selector-button:hover:not(:disabled) {
+  background-color: var(--language-selector-bg-hover-dark);
+}
+
+.dark .language-dropdown {
+  background: var(--language-selector-bg-dark);
+  border-color: var(--language-selector-border-dark);
+}
+
+.dark .language-option {
+  color: var(--language-selector-text-dark);
+}
+
+/* Fallback Language Selector (when main fails) */
+.language-selector-minimal .language-selector-button {
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.language-selector-fallback {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* Language Modal (fallback) */
+.language-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+}
+
+.language-modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 320px;
+  width: calc(100vw - 32px);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.language-modal-content h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.language-modal-options {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.language-modal-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 14px;
+}
+
+.language-modal-option:hover {
+  background: #e2e8f0;
+  border-color: #3b82f6;
+}
+
+.language-modal-close {
+  width: 100%;
+  padding: 12px;
+  background: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.language-modal-close:hover {
+  background: #4b5563;
+}
+
+/* Print Styles */
+@media print {
+  .language-selector {
+    display: none;
+  }
+}
+
+/* Focus Ring Customization for Different Browsers */
+.language-selector-button:focus-visible,
+.language-option:focus-visible {
+  outline: 2px solid var(--language-selector-border-focus);
+  outline-offset: 2px;
+}
+
+/* Safari focus ring fallback */
+.language-selector-button:focus:not(:focus-visible),
+.language-option:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Custom scrollbar for dropdown */
+.language-options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.language-options::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.language-options::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.language-options::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Firefox scrollbar */
+.language-options {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Animation for dropdown appearance */
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.language-dropdown.open {
+  animation: dropdownSlideIn 0.15s ease-out;
+}
+
+.language-dropdown:not(.open) {
+  animation: dropdownSlideOut 0.15s ease-in;
+}
+
+/* Ensure proper stacking in complex layouts */
+.language-selector {
+  isolation: isolate;
+}
+
+/* Additional mobile touch improvements */
+@media (pointer: coarse) {
+  .language-selector-button {
+    min-height: 44px;
+  }
+  
+  .language-option {
+    min-height: 48px;
+    padding: 14px 16px;
+  }
+}
