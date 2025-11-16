@@ -1,0 +1,60 @@
+{
+  "name": "amirsalahshur-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Professional portfolio website for Amir Salahshur - Software Developer",
+  "author": {
+    "name": "Amir Salahshur",
+    "email": "amirsalahshur2@gmail.com",
+    "url": "https://amirsalahshur.xyz"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next build && next export",
+    "deploy": "npm run build && touch out/.nojekyll && touch out/CNAME && echo 'amirsalahshur.xyz' > out/CNAME"
+  },
+  "dependencies": {
+    "next": "^15.0.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "framer-motion": "^11.11.17",
+    "next-themes": "^0.4.4",
+    "react-icons": "^5.3.0",
+    "react-intersection-observer": "^9.13.1",
+    "next-intl": "^3.26.1",
+    "zod": "^3.23.8",
+    "react-hook-form": "^7.54.2",
+    "@hookform/resolvers": "^3.9.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5",
+    "eslint": "^9",
+    "eslint-config-next": "^15.0.3",
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8",
+    "autoprefixer": "^10.4.20",
+    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/forms": "^0.5.9"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "portfolio",
+    "resume",
+    "nextjs",
+    "typescript",
+    "react",
+    "tailwindcss",
+    "professional-website"
+  ]
+}
