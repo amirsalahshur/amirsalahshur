@@ -4,7 +4,7 @@
 
 <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&size=24&duration=3000&pause=1000&color=0EA5E9&center=true&vCenter=true&width=600&height=100&lines=Software+Developer+%F0%9F%92%BB;Problem+Solver+%F0%9F%A7%A9;Tech+Enthusiast+%F0%9F%9A%80;Fast+Learner+%F0%9F%93%9A;Clean+Code+Advocate+%E2%9C%A8" alt="Typing SVG" />
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-amirsalahshur.xyz-0EA5E9?style=for-the-badge&logo=google-chrome&logoColor=white)](https://amirsalahshur.xyz)
+[![Portfolio](https://img.shields.io/badge/Portfolio-amirsalahshur.xyz-0EA5E9?style=for-the-badge&logo=google-chrome&logoColor=white)](https://portfolio.amirsalahshur.xyz)
 [![Email](https://img.shields.io/badge/Email-amirsalahshur2%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:amirsalahshur2@gmail.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/amirsalahshur)
 
